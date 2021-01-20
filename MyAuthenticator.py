@@ -14,7 +14,7 @@ def Authenticator():
     d = r.choice(number_list)
     e = r.choice(number_list)
     f = r.choice(number_list)
-    print([a,b,c,d,e,f])
+    return([a,b,c,d,e,f])
 while Authenticate:
     import time as t
     code = input("Would you like a code? If yes type 'Y' otherwise type 'N': ").upper()
