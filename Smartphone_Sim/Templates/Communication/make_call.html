@@ -1,0 +1,108 @@
+{%load static%}
+{%load crispy_forms_tags%}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'CSS/App.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="{%static 'JS/dial-number.js' %}"
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Condensed:wght@100&display=swap" rel="stylesheet">
+    <title>Make Call</title>
+  </head>
+  <body class="Home-Page">
+    <h1>
+      <a href="{%url "Communication:call-view"%}" class="back">
+        <img src="{%static 'Images/back.png' %}" class="back">
+      </a>
+      Dial Number
+    </h1>
+    <div class="container-fluid img-container">
+      <form method="POST">
+        {%csrf_token%}
+        <div class="container-fluid d-flex justify-content-center mb-5">
+          <input type="text" id="number" value="">
+        </div>
+        <div class="container pad-container border border-dark">
+          <button class="keypad" id="1">1</button>
+          <button class="keypad" id="2">2</button>
+          <button class="keypad" id="3">3</button>
+          <button class="keypad" id="4">4</button>
+          <button class="keypad" id="5">5</button>
+          <button class="keypad" id="6">6</button>
+          <button class="keypad" id="7">7</button>
+          <button class="keypad" id="8">8</button>
+          <button class="keypad" id="9">9</button>
+          <button class="keypad-asterisk" id="*">*</button>
+          <button class="keypad" id="0">0</button>
+          <button class="keypad-asterisk" id="#">#</button>
+        </div>
+      </form>
+    </div>
+    <script>
+        document.getElementById("1").addEventListener('click',one)
+        document.getElementById("2").addEventListener('click',two)
+        document.getElementById("3").addEventListener('click',three)
+        document.getElementById("4").addEventListener('click',four)
+        document.getElementById("5").addEventListener('click',five)
+        document.getElementById("6").addEventListener('click',six)
+        document.getElementById("7").addEventListener('click',seven)
+        document.getElementById("8").addEventListener('click',eight)
+        document.getElementById("9").addEventListener('click',nine)
+        document.getElementById("0").addEventListener('click',zero)
+        document.getElementById("#").addEventListener('click',pound)
+        document.getElementById("*").addEventListener('click',star)
+        var input = document.getElementById("number")
+        function one(){
+          h2= document.createTextNode("1")
+        }
+        function two(){
+          h2 = document.createTextNode("2")
+          document.getElementById("number").appendChild(h2)
+        }
+        function three(){
+          h2 = document.createTextNode("3")
+          document.getElementById("number").appendChild(h2)
+        }
+        function four(){
+          h2 = document.createTextNode("4")
+          document.getElementById("number").appendChild(h2)
+        }
+        function five(){
+          h2 = document.createTextNode("5")
+          document.getElementById("number").appendChild(h2)
+        }
+        function six(){
+          h2 = document.createTextNode("6")
+          document.getElementById("number").appendChild(h2)
+        }
+        function seven(){
+          h2 = document.createTextNode("7")
+          document.getElementById("number").appendChild(h2)
+        }
+        function eight(){
+          h2 = document.createTextNode("8")
+          document.getElementById("number").appendChild(h2)
+        }
+        function nine(){
+          h2 = document.createTextNode("9")
+          document.getElementById("number").appendChild(h2)
+        }
+        function zero(){
+          h2 = document.createTextNode("0")
+          document.getElementById("number").appendChild(h2)
+        }
+        function pound(){
+          h2 = document.createTextNode("#")
+          document.getElementById("number").appendChild(h2)
+        }
+        function star(){
+          h2 = document.createTextNode("*")
+          document.getElementById("number").appendChild(h2)
+        }
+    </script>
+  </body>
+</html>

@@ -24,3 +24,14 @@ class Text(models.Model):
             prev+=self.message[i]
             i+=1
         return f"{prev} <--> {self.time}"
+
+class Contacts(models.Model):
+    Whos_Phone = models.OneToOneField(User,on_delete=models.CASCADE,null=True,blank=True)
+    contact_name = models.CharField(max_length=50,null=True, blank = True)
+    mobile_number = models.CharField(max_length=18,null=True,blank = True)
+    home_number = models.CharField(max_length=18,default=" ")
+    work_number = models.CharField(max_length=18,default=" ")
+    email = models.CharField(max_length=20,default=" ")
+
+    def __str__(self):
+        return self.contact_name

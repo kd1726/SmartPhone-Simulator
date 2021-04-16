@@ -10,7 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Condensed:wght@100&display=swap" rel="stylesheet">
-    <title>Social Media</title>
+    <title>Call Section</title>
   </head>
   <body class="Home-Page">
     <h1>
@@ -20,11 +20,11 @@
       Pick an Option
     </h1>
     <div class="container-fluid img-container">
-      <a href="{%url "Communication:call-view"%}" class="icons" title="Make a Call">
-        <h4 style="text-align:center">Call</h4>
+      <a href="{%url "Communication:make-call"%}" class="icons" title="Make a Call">
+        <h4 style="text-align:center">Make Call</h4>
         <img src="{%static "Images/Call.png" %}">
       </a>
-      <a href="#" class="icons" title="View Contacts">
+      <a href="{%url "Communication:contacts" %}" class="icons" title="View Contacts">
         <h4 style="text-align:center">View Contacts</h4>
         <img src="{%static "Images/contacts.png" %}">
       </a>

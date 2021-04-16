@@ -100,7 +100,7 @@ button.login-button{
   flex-direction: row;
   flex-wrap: wrap;
   justify-content:space-around;
-  margin-top: 15%;
+  margin-top: 5%;
 }
 a:link.icons{
   width:20%;
@@ -126,11 +126,47 @@ a:link.icons>img:hover{
 a:link.back{
   text-decoration: none !important;
 }
+a:link.contact{
+  text-decoration: none !important;
+  font-size: 50px;
+  color:white;
+}
+a:link.contact:hover{
+  text-decoration: none !important;
+  font-size: 50px;
+  color:turquoise;
+}
 img.back{
   width:60px;
   height:auto;
 }
+div.pad-container{
+  width:75%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content:space-around;
+  margin-bottom: 15%;
+}
+button.keypad{
+  border:thin solid transparent;
+  background-color: blue;
+  margin: 10px;
+  font-size: 160px;
+  width:30%;
+  border-radius: 50%;
+  height:auto;
+}
 
+button.keypad-asterisk{
+  border:thin solid blue;
+  margin: 10px;
+  border-radius: 50%;
+  font-size: 160px;
+  width:30%;
+  height:auto;
+  background-color: blue;
+}
 @keyframes biggersmaller {
 0%{width:80%}
 50%{width:100%}
