@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from django.core.management import utils
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,7 +28,6 @@ SECRET_KEY = 'django-insecure-uns^uj$f@-&zp@xjk%0_-=bfdnqc6i7o0+t6$2cgb@i9zd@_ri
 DEBUG = True
 
 ALLOWED_HOSTS = []
-from django.core.management import utils
 
 # Application definition
 
