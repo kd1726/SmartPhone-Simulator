@@ -23,7 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-uns^uj$f@-&zp@xjk%0_-=bfdnqc6i7o0+t6$2cgb@i9zd@_ri'
-
+#TWILIO_AUTH_TOKEN = os.environ["TWILIO_KEY"]
+#TWILIO_AUTH_SID = os.envrion['TWILIO_SID']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -126,7 +127,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-STATIC_URL = '/static/'
 MEDIA_URL = '/App_Files/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'App_Files')
 #STATIC_ROOT = os.path.join(BASE_DIR,'static')
@@ -134,4 +134,6 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
+LOGIN_REDIRECT_URL = 'Home'
+LOGIN_URL = 'Login'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
