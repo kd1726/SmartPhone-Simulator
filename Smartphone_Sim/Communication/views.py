@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.views.generic import ListView,CreateView,UpdateView,DeleteView,DetailView
 import os
 from twilio.rest import Client
+from Smartphone_Sim.settings import TWILIO_AUTH_SID, TWILIO_AUTH_TOKEN
 # Create your views here.
 
 @login_required
@@ -22,19 +23,22 @@ def make_a_call_view(request):
 
 @login_required
 def calling(request):
-    if request.POST:
-        number = request.POST['number']
-        account_sid = os.environ['TWILIO_ACCOUNT_SID']
-        auth_token = os.environ['TWILIO_AUTH_TOKEN']
-        client = Client(account_sid, auth_token)
+    try:
+        if request.POST:
+            number = request.POST['number']
+            account_sid = TWILIO_AUTH_SID
+            auth_token = TWILIO_AUTH_TOKEN
+            client = Client(account_sid, auth_token)
 
-        call = client.calls.create(
-                                url='http://demo.twilio.com/docs/voice.xml',
-                                to='+15558675310',
-                                from_='+15017122661'
-                    )
+            call = client.calls.create(
+                                    url='http://demo.twilio.com/docs/voice.xml',
+                                    to=request.POST['number'],
+                                    from_='+15017122661'
+                        )
 
-print(call.sid)
+            print(call.sid)
+    except IndexError as e:
+        pass
 @login_required
 def certify_call(request):
     return render(request,"Communication/calling.html",)

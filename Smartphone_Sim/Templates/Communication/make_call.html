@@ -29,104 +29,15 @@
           <div class="input-group-prepend">
             <span class="input-group-text bg-primary">Number</span>
           </div>
-          <input type="text" pattern="1234567890" class="form-control bg-info text-light" name="number">
+          <input type="text" class="form-control bg-info text-light" name="number">
         </div>
-      <!--<div class="container pad-container border border-dark">
-        <button class="keypad" id="1">1</button>
-        <button class="keypad" id="2">2</button>
-        <button class="keypad" id="3">3</button>
-        <button class="keypad" id="4">4</button>
-        <button class="keypad" id="5">5</button>
-        <button class="keypad" id="6">6</button>
-        <button class="keypad" id="7">7</button>
-        <button class="keypad" id="8">8</button>
-        <button class="keypad" id="9">9</button>
-        <button class="keypad-asterisk" id="*">*</button>
-        <button class="keypad" id="0">0</button>
-        <button class="keypad-asterisk" id="#">#</button>
-        <div>-->
-          <!--<a href="{%url "Communication:certify" %}" role="submit" class="d-flex justify-content-center" onclick="this.make_call"><img src="{%static "Images/Call.png"%}" class="call"></a>-->
           <div class="form-group">
             <input type="submit" value="Call" class="call-button">
           </div>
         </form>
     </div>
     <script>
-        document.getElementById("1").addEventListener('click',one)
-        document.getElementById("2").addEventListener('click',two)
-        document.getElementById("3").addEventListener('click',three)
-        document.getElementById("4").addEventListener('click',four)
-        document.getElementById("5").addEventListener('click',five)
-        document.getElementById("6").addEventListener('click',six)
-        document.getElementById("7").addEventListener('click',seven)
-        document.getElementById("8").addEventListener('click',eight)
-        document.getElementById("9").addEventListener('click',nine)
-        document.getElementById("0").addEventListener('click',zero)
-        document.getElementById("#").addEventListener('click',pound)
-        document.getElementById("*").addEventListener('click',star)
-        var input = document.getElementById("number")
-        var pad_list = {
-          "1":1,
-          "2":2,
-          "3":3,
-          "4":4,
-          "5":5,
-          "6":6,
-          "7":7,
-          "8":8,
-          "9":9,
-          "0":0,
-          "#":"#",
-          "*":"*"
-        }
-        function one(){
-          h2= document.createTextNode("1")
-          document.getElementById("number").appendChild(h2)
-        }
-        function two(){
-          h2 = document.createTextNode("2")
-          document.getElementById("number").appendChild(h2)
-        }
-        function three(){
-          h2 = document.createTextNode("3")
-          document.getElementById("number").appendChild(h2)
-        }
-        function four(){
-          h2 = document.createTextNode("4")
-          document.getElementById("number").appendChild(h2)
-        }
-        function five(){
-          h2 = document.createTextNode("5")
-          document.getElementById("number").appendChild(h2)
-        }
-        function six(){
-          h2 = document.createTextNode("6")
-          document.getElementById("number").appendChild(h2)
-        }
-        function seven(){
-          h2 = document.createTextNode("7")
-          document.getElementById("number").appendChild(h2)
-        }
-        function eight(){
-          h2 = document.createTextNode("8")
-          document.getElementById("number").appendChild(h2)
-        }
-        function nine(){
-          h2 = document.createTextNode("9")
-          document.getElementById("number").appendChild(h2)
-        }
-        function zero(){
-          h2 = document.createTextNode("0")
-          document.getElementById("number").appendChild(h2)
-        }
-        function pound(){
-          h2 = document.createTextNode("#")
-          document.getElementById("number").appendChild(h2)
-        }
-        function star(){
-          h2 = document.createTextNode("*")
-          document.getElementById("number").appendChild(h2)
-        }
+      
     </script>
   </body>
 </html>

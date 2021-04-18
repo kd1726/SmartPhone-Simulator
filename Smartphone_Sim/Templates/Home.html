@@ -15,7 +15,7 @@
   <body id="entrybg">
     <div id="left"></div>
     <div id="center">
-      <form method="POST" action="{%url 'Home'%}" class="form-adjustment">
+      <form method="POST" class="form-adjustment">
         <h4 style="text-align:center; color:white;" class="title"> Welcome to My SmartPhone Project</h4>
         {%csrf_token%}
         {{form|crispy}}
