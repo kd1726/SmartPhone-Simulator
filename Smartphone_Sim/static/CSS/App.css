@@ -174,7 +174,13 @@ input[type="submit"].call-button{
   border: thin solid #2c9c91;
   border-radius: 10px;
 }
-
+button.end{
+  background-color:red;
+  color:white;
+  padding:10px 25px 10px 25px;
+  border: thin solid #2c9c91;
+  border-radius: 10px;
+}
 @keyframes biggersmaller {
 0%{width:80%}
 50%{width:100%}

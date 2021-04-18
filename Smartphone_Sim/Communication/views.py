@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from .models import Contacts
@@ -33,15 +34,19 @@ def calling(request):
             call = client.calls.create(
                                     url='http://demo.twilio.com/docs/voice.xml',
                                     to=request.POST['number'],
-                                    from_='+12188750645'
-                        )
-
+                                    from_='+12188750645')
             print(call.sid)
-    except IndexError as e:
-        pass
+
+            return reverse("Communication:conversation")
+    except TwilioRestException as e:
+        return render(request, "Communication/bad_number.html")
+
+    except NameError as e:
+        return render(request, "Communication/bad_number.html")
+        
 @login_required
-def certify_call(request):
-    return render(request,"Communication/calling.html",)
+def convo_screen(request):
+    return render(request,"Communication/convo_screen.html",)
 
 @method_decorator(login_required,name="dispatch")
 class ViewContacts(ListView):
