@@ -23,7 +23,7 @@
     <!--<h2 id="number"></h2>-->
     <h2> Input the number to call </h2>
     <div class="container-fluid img-container">
-      <form method="POST" action = "{%url 'Communication:calling' %}"class="mt-5">
+      <form method="POST" action = "{%url 'Communication:calling'%}"class="mt-5">
         {%csrf_token%}
         <div class="input-group">
           <div class="input-group-prepend">
@@ -45,6 +45,7 @@
        button.classList.add("rounded")
        div.appendChild(button)
        sound = new audio("/static/Sounds/ringing.mp3")
+       sound.play()
       }
     </script>
   </body>

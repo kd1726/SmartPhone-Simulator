@@ -19,7 +19,18 @@
       </a>
       Contacts</h1>
     <div class="container-fluid img-container">
-      {%for items in contacts%}
-        <a href="#" class="contact">{{items.contact_name|capfirst}}</a>
-      {%endfor%}
+      <div clas="rows">
+        <div class="container d-flex justify-content-center mb-5">
+          <button class="login-button"><a href="#">Add New Contact</a></button>
+        </div>
+        <div>
+        {%for items in contacts%}
+          {%if user.username == items.Whos_Phone%}
+            <a href="{%url "Communication:view-contact" items.contact_name items.id%}" class="contact">{{items.contact_name|capfirst}}</a>
+          {%endif%}
+        {%endfor%}
+        </div>
+      </div>
     </div>
+  </body>
+</html>

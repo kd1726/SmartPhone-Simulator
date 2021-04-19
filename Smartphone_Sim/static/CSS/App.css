@@ -174,12 +174,14 @@ input[type="submit"].call-button{
   border: thin solid #2c9c91;
   border-radius: 10px;
 }
-button.end{
-  background-color:red;
-  color:white;
-  padding:10px 25px 10px 25px;
-  border: thin solid #2c9c91;
-  border-radius: 10px;
+.calling-icon{
+  border:thin solid transparent;
+  border-radius: 100%;
+  width:80%;
+  animation-name: biggersmaller;
+  animation-iteration-count: infinite;
+  animation-duration: 5s;
+  height:auto;
 }
 @keyframes biggersmaller {
 0%{width:80%}
