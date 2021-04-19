@@ -17,15 +17,17 @@
       <a href="{%url "Communication:contacts"%}" class="back">
         <img src="{%static 'Images/back.png' %}" class="back">
       </a>
-      Would you like to delete this contact?</h1>
+      Contacts</h1>
     <div class="container-fluid img-container">
-        <form class="POST" action = "{%url "Communication:delete" contact.contact_name contact.id%}" enctype="multipart/form-data">
-          {%csrf_token%}
-          <div class="form-group d-flex justify-content-center">
-            <input type="submit" value="Delete" class="text-danger login-button mr-5">
-          </div>
-        </form>
-    <a href="{%url "Communication:view-contact" contact.contact_name contact.id%}" class="ml-5"><button class="login-button">Dont Delete</button></a>
+      <div clas="rows">
+        <div>
+          <form method="POST" action="{%url "Communication:add"%}">
+            {%csrf_token%}
+            {{form|crispy}}
+            <div class="d-flex justify-content-center">
+              <input type="submit" value="Add Contact" class="btn login-button">
+            </div>
+          </form>
+      </div>
     </div>
-  </body>
-</html>
+  </div>

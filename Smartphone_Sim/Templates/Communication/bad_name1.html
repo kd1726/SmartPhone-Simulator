@@ -13,19 +13,8 @@
     <title>Your Contacts</title>
   </head>
   <body class="Home-Page">
-    <h1>
-      <a href="{%url "Communication:contacts"%}" class="back">
+    <h1 style="color:red;">
+      <a href="{%url "Communication:send-text-view"%}" class="back">
         <img src="{%static 'Images/back.png' %}" class="back">
       </a>
-      Would you like to delete this contact?</h1>
-    <div class="container-fluid img-container">
-        <form class="POST" action = "{%url "Communication:delete" contact.contact_name contact.id%}" enctype="multipart/form-data">
-          {%csrf_token%}
-          <div class="form-group d-flex justify-content-center">
-            <input type="submit" value="Delete" class="text-danger login-button mr-5">
-          </div>
-        </form>
-    <a href="{%url "Communication:view-contact" contact.contact_name contact.id%}" class="ml-5"><button class="login-button">Dont Delete</button></a>
-    </div>
-  </body>
-</html>
+      If you are seeing this message; then you did not input your username correctly. Try again.</h1>

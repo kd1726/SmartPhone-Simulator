@@ -10,22 +10,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Condensed:wght@100&display=swap" rel="stylesheet">
-    <title>Your Contacts</title>
+    <title>Voice Mail</title>
   </head>
   <body class="Home-Page">
     <h1>
-      <a href="{%url "Communication:contacts"%}" class="back">
+      <a href="{%url "Communication:call-view"%}" class="back">
         <img src="{%static 'Images/back.png' %}" class="back">
       </a>
-      Would you like to delete this contact?</h1>
-    <div class="container-fluid img-container">
-        <form class="POST" action = "{%url "Communication:delete" contact.contact_name contact.id%}" enctype="multipart/form-data">
-          {%csrf_token%}
-          <div class="form-group d-flex justify-content-center">
-            <input type="submit" value="Delete" class="text-danger login-button mr-5">
-          </div>
-        </form>
-    <a href="{%url "Communication:view-contact" contact.contact_name contact.id%}" class="ml-5"><button class="login-button">Dont Delete</button></a>
-    </div>
+      Voice Mail Feature Coming soon</h1>
   </body>
 </html>

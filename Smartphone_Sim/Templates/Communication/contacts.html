@@ -21,12 +21,12 @@
     <div class="container-fluid img-container">
       <div clas="rows">
         <div class="container d-flex justify-content-center mb-5">
-          <button class="login-button"><a href="#">Add New Contact</a></button>
+          <button class="login-button"><a href="{%url "Communication:add-contact-view"%}">Add New Contact</a></button>
         </div>
         <div>
         {%for items in contacts%}
           {%if user.username == items.Whos_Phone%}
-            <a href="{%url "Communication:view-contact" items.contact_name items.id%}" class="contact">{{items.contact_name|capfirst}}</a>
+            <a href="{%url "Communication:view-contact" items.contact_name items.id%}" class="contact">{{items.contact_name|capfirst}}</a><br>
           {%endif%}
         {%endfor%}
         </div>
