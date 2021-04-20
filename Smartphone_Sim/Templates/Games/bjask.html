@@ -14,28 +14,17 @@
   </head>
   <body class="Home-Page">
     <h1>
-      <a href="{%url 'Home' %}" class="back">
+      <a href="{%url 'Games:game-center' %}" class="back">
         <img src="{%static 'Images/back.png' %}" class="back">
       </a>
-      What game would you like to play?
+      Single Player or MultiPlayer?
     </h1>
-    <div class="container-fluid img-container">
-      <a href="{%url "Games:black-jack-ask"%}" class="icons" title="Call">
-        <h4 style="text-align:center">Black Jack</h4>
-        <img src="{%static "Images/black-jack.png" %}">
+    <div class="container-fluid img-container d-flex justify-content-center">
+      <a href="{%url "Games:black-jack-single"%}" class="icons" title="Call">
+        <button class="login-button px-5 mr-5">Single</button>
       </a>
-      <a href="{%url "Communication:text-section"%}" class="icons" title="Text">
-        <h4 style="text-align:center">Tic Tac Toe</h4>
-        <img src="{%static "Images/ttt.png" %}">
-      </a>
-      <a href="{%url "Communication:email-section"%}" class="icons" title="Email">
-        <h4 style="text-align:center">Rock Paper Sissors</h4>
-        <img src="{%static "Images/rps.png" %}">
-      </a>
-      <a href="{%url "Communication:email-section"%}" class="icons" title="Email">
-        <h4 style="text-align:center">Guess the Number</h4>
-        <img src="{%static "Images/guess.png" %}">
-      </a>
+      <a href="{%url "Games:black-jack-double"%}" class="icons" title="Text">
+        <button class="login-button px-5 ml-5">Multi</button>
     </div>
   </body>
 </html>

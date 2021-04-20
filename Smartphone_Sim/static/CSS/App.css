@@ -188,3 +188,43 @@ input[type="submit"].call-button{
 50%{width:100%}
 100%{width:80%}
 }
+.flex-blackjack-row-1, .flex-blackjack-row-2, .flex-blackjack-row-3{
+  display:flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  padding:10px;
+  color:white;
+  width: 100%;
+  border:thin solid black;
+}
+.flex-blackjack-row-1, .flex-blackjack-row-2,.flex-blackjack-row-3{
+background-image:linear-gradient(to right, black,green,black);/*url('https://sheldonschoolmediatomelsworth.files.wordpress.com/2012/01/wpid-51bmfubvhllsl5001.jpg');*/
+background-position: center;
+}
+.flex-blackjack-row-1 div{
+  padding:10px;
+  height:350px;
+  flex: 1;
+  text-align: center;
+  border: 1px solid black;
+}
+.flex-blackjack-row-1 img{
+  width:25%;
+  padding:10px;
+}
+.flex-blackjack-row-2 div{
+  padding:10px;
+  flex: 1;
+  text-align: center;
+  border: 1px solid black;
+}
+table tr, td,th{
+  border-collapse: collapse;
+  border: 1px solid black;
+  padding:5px;
+  text-align: center;
+}
+table{
+  float:right;
+}
