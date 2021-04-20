@@ -22,7 +22,6 @@ function blackjackHit(){
     showScore(YOU)
   }
 }
-//to remove async stuff comment out sleep and things labeled async stuff
 
 function blackjackStand(activePlayer=DEALER) {
   blackjack_game['isStand'] =true
@@ -33,16 +32,12 @@ function blackjackStand(activePlayer=DEALER) {
   updateScore(card1,DEALER)
   showScore(DEALER)
   }
-//async stuff
-blackjack_game['turnsOver'] = true;
-let winner = whoWon();
-showScore(winner)
-/*  if (DEALER['score']>15){
+  if (DEALER['score']>15){
     blackjack_game['turnsOver'] = true;
     let winner = whoWon();
     showScore(winner)
     console.log(blackjack_game['turnsOver'])
-  }*/
+  }
 }
 
 function showcard(activePlayer,card){

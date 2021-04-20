@@ -13,5 +13,11 @@ def play_blackjack_single(request):
 def play_blackjack_double(request):
     return render(request,"Games/bjdouble.html")
 
+def rock_paper_scissor(request):
+    return render(request,"Games/rps.html")
+
 def guess_the_number(request):
-    pass
+    return render(request,"Games/guess.html")
+
+def tic_tac_toe(request):
+    return render(request,"Games/ttt.html")

@@ -14,28 +14,8 @@
   </head>
   <body class="Home-Page">
     <h1>
-      <a href="{%url 'Home' %}" class="back">
+      <a href="{%url 'Games:game-center' %}" class="back">
         <img src="{%static 'Images/back.png' %}" class="back">
       </a>
-      What game would you like to play?
+      Rock Paper Scissors Says!
     </h1>
-    <div class="container-fluid img-container">
-      <a href="{%url "Games:black-jack-ask"%}" class="icons" title="Black Jack">
-        <h4 style="text-align:center">Black Jack</h4>
-        <img src="{%static "Images/black-jack.png" %}">
-      </a>
-      <a href="{%url "Games:tic-tac-toe"%}" class="icons" title="Tic Tac Toe">
-        <h4 style="text-align:center">Tic Tac Toe</h4>
-        <img src="{%static "Images/ttt.png" %}">
-      </a>
-      <a href="{%url "Games:rps"%}" class="icons" title="Rock Paper Scissors">
-        <h4 style="text-align:center">Rock Paper Scissors</h4>
-        <img src="{%static "Images/rps.png" %}">
-      </a>
-      <a href="{%url "Games:guess"%}" class="icons" title="Guess the Number">
-        <h4 style="text-align:center">Guess the Number</h4>
-        <img src="{%static "Images/guess.png" %}">
-      </a>
-    </div>
-  </body>
-</html>
