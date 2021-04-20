@@ -305,5 +305,24 @@ def send_email(request):
 @method_decorator(login_required, name="dispatch")
 class ViewEmails(ListView):
     model = Emailing
-    template_name = "Communication/view-messages.html"
+    template_name = "Communication/view-emails.html"
     context_object_name = "email"
+
+@method_decorator(login_required, name="dispatch")
+class ViewEmailConversation(DetailView):
+    model = Emailing
+    template_name = "Communication/email-conversation.html"
+    context_object_name = "text"
+
+@login_required
+def DeleteEmail(request,to,pk):
+    name = Emailing.objects.filter(id=pk).get()
+    obj = get_object_or_404(Emailing,id=pk,to=name.to)
+    return render(request,"Communication/delete_email.html",{"text":obj})
+
+@login_required
+def deleteemail(request,to,pk):
+    name = Emailing.objects.filter(id=pk).get()
+    obj = get_object_or_404(Emailing,id=pk,to=name.to)
+    obj.delete()
+    return redirect("Communication:emails")

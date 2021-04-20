@@ -30,4 +30,8 @@ urlpatterns=[
     path("Email-Section/",views.email_view,name="email-section"),
     path("Email-Section/Send-Email/",views.send_email_view,name="send-email-view"),
     path("Email-Section/Send-Email/Sending",views.send_email,name="send-email"),
+    path("Email-Section/Messages/",views.ViewEmails.as_view(),name="emails"),
+    path("Email-Section/Messages/<str:to>/<int:pk>/",views.ViewEmailConversation.as_view(),name="email-conversation"),
+    path("Email-Section/Messages/Delete/<str:to>/<int:pk>/",views.DeleteEmail,name="ask-delete-email"),
+    path("Email-Section/Messages/Delete/<str:to>/<int:pk>/Deleting",views.deleteemail,name="delete-email-now"),
 ]

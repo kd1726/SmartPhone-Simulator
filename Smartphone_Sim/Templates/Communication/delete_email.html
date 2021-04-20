@@ -10,24 +10,22 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Condensed:wght@100&display=swap" rel="stylesheet">
-    <title>Email Section</title>
+    <title>Delete Email Log</title>
   </head>
   <body class="Home-Page">
     <h1>
-      <a href="{%url "Communication:communication-view" %}" class="back">
+      <a href="{%url "Communication:email-conversation" text.to text.id%}" class="back">
         <img src="{%static 'Images/back.png' %}" class="back">
       </a>
-      Pick an Option
-    </h1>
+      Would you like to delete this email log?</h1>
     <div class="container-fluid img-container">
-      <a href="{%url "Communication:emails"%}" class="icons" title="Missed Calls">
-        <h4 style="text-align:center">Sent Emails</h4>
-        <img src="{%static "Images/email.png" %}">
-      </a>
-      <a href="{%url "Communication:send-email-view"%}" class="icons" title="Voice Mail">
-        <h4 style="text-align:center">Send Email</h4>
-        <img src="{%static "Images/send.png" %}">
-      </a>
+        <form class="POST" action = "{%url "Communication:delete-email-now" text.to text.id%}" enctype="multipart/form-data">
+          {%csrf_token%}
+          <div class="form-group d-flex justify-content-center">
+            <input type="submit" value="Delete" class="text-danger login-button mr-5">
+          </div>
+        </form>
+    <a href="{%url "Communication:email-conversation" text.to text.id%}" class="ml-5"><button class="login-button">Dont Delete</button></a>
     </div>
   </body>
 </html>
