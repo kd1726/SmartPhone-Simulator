@@ -17,7 +17,7 @@
       <a href="{%url 'Home' %}" class="back">
         <img src="{%static 'Images/back.png' %}" class="back">
       </a>
-      What would you like to do
+      What would you like to do?
     </h1>
     <div class="container-fluid img-container">
       <a href="{%url "Communication:call-view"%}" class="icons" title="Call">
@@ -28,7 +28,7 @@
         <h4 style="text-align:center">Text</h4>
         <img src="{%static "Images/Text.png" %}">
       </a>
-      <a href="#" class="icons" title="Email">
+      <a href="{%url "Communication:email-section"%}" class="icons" title="Email">
         <h4 style="text-align:center">Email</h4>
         <img src="{%static "Images/email.png" %}">
       </a>

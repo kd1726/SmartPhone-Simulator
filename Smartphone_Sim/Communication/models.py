@@ -30,3 +30,14 @@ class Contacts(models.Model):
 
     def __str__(self):
         return self.contact_name
+
+class Emailing(models.Model):
+    whos_email1 = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    username = models.CharField(max_length=50,null=True, blank = True)
+    to =  models.EmailField(max_length=50,null=True, blank = True)
+    subject =  models.CharField(max_length=50,null=True)
+    message = models.TextField(max_length=1000,null=False)
+    time = models.DateTimeField(default = timezone.now)
+
+    def __str__(self):
+        return self.to

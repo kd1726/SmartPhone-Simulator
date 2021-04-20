@@ -10,24 +10,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Condensed:wght@100&display=swap" rel="stylesheet">
-    <title>Text Section</title>
+    <title>Email</title>
   </head>
   <body class="Home-Page">
-    <h1>
-      <a href="{%url "Communication:communication-view" %}" class="back">
+    <h1 style="color:red;">
+      <a href="{%url "Communication:send-email-view"%}" class="back">
         <img src="{%static 'Images/back.png' %}" class="back">
       </a>
-      Pick an Option
-    </h1>
-    <div class="container-fluid img-container">
-      <a href="{%url "Communication:messages"%}" class="icons" title="Missed Calls">
-        <h4 style="text-align:center">View Text Messages</h4>
-        <img src="{%static "Images/Text.png" %}">
-      </a>
-      <a href="{%url "Communication:send-text-view"%}" class="icons" title="Voice Mail">
-        <h4 style="text-align:center">Send Message</h4>
-        <img src="{%static "Images/send.png" %}">
-      </a>
-    </div>
-  </body>
-</html>
+      If you are seeing this message; then you did not input your username correctly. Try again.</h1>

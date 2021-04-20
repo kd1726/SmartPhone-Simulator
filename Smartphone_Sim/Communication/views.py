@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from .models import Contacts,Call,Text
+from .models import Contacts,Call,Text,Emailing
 from django.contrib.auth.models import User
 from django.views.generic import ListView,CreateView,UpdateView,DeleteView,DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
@@ -37,7 +37,7 @@ def calling(request):
         call = client.calls.create(
                                 url='http://demo.twilio.com/docs/voice.xml',
                                 to=number,
-                                from_='+12188750645')
+                                from_='+19564136773')
         print(call.sid)
         #numbers = Contacts.objects.all().filter(Whos_Phone=request.user.username)
         #for i in numbers:
@@ -208,14 +208,14 @@ def send_text(request):
                 account_sid = TWILIO_AUTH_SID
                 auth_token = TWILIO_AUTH_TOKEN
                 client = Client(account_sid, auth_token)
-                print(dir(client))
                 message = client.messages.create(
-                    body = str(request.POST['message']),
-                    from_="+12188750645",
-                    to = str(request.POST['who'])
+                    body = request.POST['message'],
+                    from_="+19564136773",
+                    to = request.POST['who']
                     )
                 print(message.sid)
                 form.save()
+                Text.objects.filter(texter=request.user.username,).update(texter1=request.user)
                 return redirect("Communication:text-section")
             else:
                 return render(request,"Communication/bad_name1.html",{"form":form})
@@ -225,3 +225,85 @@ def send_text(request):
     else:
         form = form = CreateText()
         return render(request,"Communication/send-text-view.html",{"form":form})
+
+@method_decorator(login_required, name="dispatch")
+class ViewMessages(ListView):
+    model = Text
+    template_name = "Communication/view-messages.html"
+    context_object_name = "text"
+
+@method_decorator(login_required, name="dispatch")
+class ViewConversation(DetailView):
+    model = Text
+    template_name = "Communication/conversation.html"
+    context_object_name = "text"
+
+@login_required
+def DeleteText(request,who,pk):
+    name = Text.objects.filter(id=pk).get()
+    obj = get_object_or_404(Text,id=pk,who=name.who)
+    return render(request,"Communication/delete_text.html",{"text":obj})
+
+@login_required
+def deletetext(request,who,pk):
+    name = Text.objects.filter(id=pk).get()
+    obj = get_object_or_404(Text,id=pk,who=name.who)
+    obj.delete()
+    return redirect("Communication:messages")
+
+@login_required
+def email_view(request):
+    return render(request,"Communication/email-view.html")
+
+class CreateEmail(forms.ModelForm):
+    class Meta:
+        model = Emailing
+        fields = ["username","to","subject","message"]
+
+        widgets = {
+        "username":forms.TextInput(attrs={"required":True,
+                                            "placeholder":"Your Username"}),
+        }
+
+@login_required
+def send_email_view(request):
+    form = CreateEmail()
+    return render(request,"Communication/send-email-view.html",{"form":form})
+
+@login_required
+def send_email(request):
+    form = CreateText()
+    if request.POST:
+        form = CreateEmail(request.POST)
+        if form.is_valid():
+            if request.POST['username']==request.user.username:
+                import smtplib, ssl
+                port =  465
+                password = "kevinsproject123$"
+                sender_email = request.user.email
+                receiver_email = request.POST['to']
+                message = f"""
+                Subject: {request.POST['subject']}
+
+                {request.POST['message']}"""
+                context = ssl.create_default_context()
+                with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
+                    server.login(sender_email, password)
+                    server.sendmail(sender_email, receiver_email, message)
+                form.save()
+                Emailing.objects.filter(username=request.user.username,).update(whos_email1=request.user)
+                return redirect("Communication:email-section")
+            else:
+                return render(request,"Communication/bad_name2.html",{"form":form})
+        else:
+            form  = CreateEmail()
+            return render(request,"Communication/send-email-view.html",{"form":form})
+    else:
+        form = form = CreateText()
+        return render(request,"Communication/send-email-view.html",{"form":form})
+
+@method_decorator(login_required, name="dispatch")
+class ViewEmails(ListView):
+    model = Emailing
+    template_name = "Communication/view-messages.html"
+    context_object_name = "email"

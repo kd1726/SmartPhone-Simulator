@@ -24,7 +24,9 @@
           <form method="POST" action="{%url "Communication:send-text"%}">
             {%csrf_token%}
             {{form|crispy}}
-            <input type="submit" value="Send" class="btn login-button">
+            <div class="d-flex justify-content-center">
+              <input type="submit" value="Send" class="btn login-button">
+            </div>
           </form>
       </div>
     </div>

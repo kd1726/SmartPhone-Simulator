@@ -22,5 +22,12 @@ urlpatterns=[
     path("Call-Section/Voice-Mail/",views.voicemail,name="voicemail"),
     path("Text-Section/",views.text_view,name="text-section"),
     path("Text-Section/Send-Text/",views.send_text_view,name="send-text-view"),
-    path("Text-Section/Send-Text/Sending",views.send_text,name="send-text")
+    path("Text-Section/Send-Text/Sending",views.send_text,name="send-text"),
+    path("Text-Section/Messages/",views.ViewMessages.as_view(),name="messages"),
+    path("Text-Section/Messages/<str:who>/<int:pk>/",views.ViewConversation.as_view(),name="msg-conversation"),
+    path("Text-Section/Messages/Delete/<str:who>/<int:pk>/",views.DeleteText,name="delete-msg"),
+    path("Text-Section/Messages/Delete/<str:who>/<int:pk>/Deleting",views.deletetext,name="delete-msg-now"),
+    path("Email-Section/",views.email_view,name="email-section"),
+    path("Email-Section/Send-Email/",views.send_email_view,name="send-email-view"),
+    path("Email-Section/Send-Email/Sending",views.send_email,name="send-email"),
 ]
