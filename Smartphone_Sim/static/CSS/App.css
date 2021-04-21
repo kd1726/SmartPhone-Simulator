@@ -70,7 +70,9 @@ h1,h2,h3,h4,h5,h6{
   color:white !important;
   text-align: center;
 }
-
+p{
+  color:white;
+}
 #make-account-form{
   width:50%;
 }
