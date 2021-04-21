@@ -150,15 +150,6 @@ div.pad-container{
   justify-content:space-around;
   margin-bottom: 15%;
 }
-button.keypad{
-  border:thin solid transparent;
-  background-color: blue;
-  margin: 10px;
-  font-size: 160px;
-  width:30%;
-  border-radius: 50%;
-  height:auto;
-}
 
 button.keypad-asterisk{
   border:thin solid blue;
@@ -230,7 +221,9 @@ table tr, td,th{
 table{
   float:right;
 }
-
+li{
+  color:white;
+}
 #rock,#paper,#scissors{
   width:20%;
   border-radius: 50%;
@@ -252,4 +245,43 @@ table{
 0%{width:20%}
 50%{width:30%}
 100%{width:20%}
+}
+#question{
+  opacity: 0 ;
+  font-size: 30px;
+  animation-name: vanishingtext;
+  animation-iteration-count: 1;
+  animation-duration: 3s;
+}
+button.keypad{
+  border:thin solid transparent;
+
+  font-size: 160px;
+
+}
+#button-container{
+  width:50%;
+}
+.numbers{
+  background-image: linear-gradient(-45deg,midnightblue,skyblue,midnightblue);
+  width:25%;
+  font-size: 80px;
+  border-radius: 50%;
+  animation-name: guessbiggersmaller;
+  animation-iteration-count: infinite;
+  animation-duration: 5s;
+  height:auto;
+  margin:2%;
+  visibility: hidden;
+}
+.numbers:hover{
+  box-shadow: 2px 2px 2px cyan;
+}
+
+@keyframes guessbiggersmaller {
+}
+@keyframes vanishingtext {
+  0%{opacity: 0}
+  50%{opacity: 1}
+  100%{opacity: 0}
 }
