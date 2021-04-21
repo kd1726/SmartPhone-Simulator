@@ -51,7 +51,7 @@ def calling(request):
         caller = request.user.username,
         who  = number
         )
-        return reverse("Communication:conversation")
+        return redirect("Communication:conversation")
     else:
         return render(request,"Communication/make_call.html",{})
 

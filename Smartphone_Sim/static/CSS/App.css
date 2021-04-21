@@ -228,3 +228,26 @@ table tr, td,th{
 table{
   float:right;
 }
+
+#rock,#paper,#scissors{
+  width:20%;
+  border-radius: 50%;
+  animation-name: rpsbiggersmaller;
+  animation-iteration-count: infinite;
+  animation-duration: 5s;
+  height:auto;
+}
+#rock:hover{
+  box-shadow: 2px 2px 2px cyan;
+}
+#paper:hover{
+  box-shadow: 2px 2px 2px crimson;
+}
+#scissors:hover{
+  box-shadow: 2px 2px 2px forestgreen;
+}
+@keyframes rpsbiggersmaller {
+0%{width:20%}
+50%{width:30%}
+100%{width:20%}
+}

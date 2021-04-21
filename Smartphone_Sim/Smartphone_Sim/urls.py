@@ -28,7 +28,7 @@ urlpatterns = [
     path("Home/",views.Home,name="Home"),
     path("Communication/",include("Communication.urls",namespace="Communication")),
     path("Social-Media/",include("Social_Media.urls",namespace="Social")),
-    path("Ganes/",include("Games.urls",namespace="Games")),
+    path("Games/",include("Games.urls",namespace="Games")),
     path('admin/', admin.site.urls),
 ]
 #+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
