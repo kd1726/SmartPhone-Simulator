@@ -25,13 +25,11 @@ async function Start(){
       newItem.id = "who-won"
       newItem.style.textAlign = "center"
       newItem.innerHTML = words[i]
-      console.log("Hi im working")
       element.parentNode.replaceChild(newItem,element)
         }
       }
     }
 async function rpsgame(input){
-  console.log("This is working")
   let rock = document.getElementById('rock')
   let paper = document.getElementById('paper')
   let scissor = document.getElementById('scissors')
