@@ -22,6 +22,9 @@
           </a>
             Create Account
           </h1>
+          {%if form.is_valid == False%}
+            <h2>{{errors}}</h2>
+          {%endif%}
         {{form|crispy}}
         <div class="form-group d-flex justify-content-center">
           <input type="Submit" value="Create" class="btn login-button"/>

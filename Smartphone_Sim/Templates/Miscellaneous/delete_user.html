@@ -19,7 +19,7 @@
       </a>
       Delete Your Account? This is not reversible.</h1>
     <div class="container-fluid img-container">
-        <form class="POST" action = "{%url "Tools:deleting-user" user.username user.id%}" enctype="multipart/form-data">
+        <form method="POST" action = "{%url "Tools:deleting-user" user.username user.id%}" enctype="multipart/form-data">
           {%csrf_token%}
           <div class="form-group d-flex justify-content-center">
             <input type="submit" value="Delete" class="text-danger login-button mr-5">

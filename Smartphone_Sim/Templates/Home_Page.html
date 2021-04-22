@@ -13,7 +13,7 @@
     <title>General Apps</title>
   </head>
   <body class="Home-Page">
-    <h1>Welcome {{user.first_name}}! What were would you like to go?</h1>
+    <h1>Welcome {{user.first_name|capfirst}}! What were would you like to go?</h1>
     <div class="container-fluid img-container">
       <a href="{%url "Communication:communication-view"%}" class="icons" title="Commuincation">
         <h4 style="text-align:center">Communication</h4>

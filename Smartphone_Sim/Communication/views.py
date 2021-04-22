@@ -230,9 +230,9 @@ def send_text(request):
                     if numbers!= None:
                         who = numbers.contact_name
                     else:
-                        who = number
+                        who = request.POST['who']
                 except Contacts.DoesNotExist as e:
-                    who = number
+                    who = request.POST['who']
                 Text.objects.filter(texter=request.user.username,).update(texter1=request.user, who=who)
                 return redirect("Communication:text-section")
             else:
@@ -298,7 +298,7 @@ def send_email(request):
                 import smtplib, ssl
                 port =  465
                 password = os.environ["email_project_pass"]
-                sender_email = request.user.email
+                sender_email = "kevinsproject0@gmail.com"
                 receiver_email = request.POST['to']
                 message = f"""
                 Subject: {request.POST['subject']}

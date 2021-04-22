@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect,reverse, HttpResponse, get_object_or_404
+from django.shortcuts import render, redirect,reverse, HttpResponseRedirect, get_object_or_404
 from django.views.generic import ListView, CreateView, UpdateView, DetailView,DeleteView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -21,10 +21,12 @@ def profile(request,username,pk):
 def delete_user_view(request,username,pk):
     return render(request, "Miscellaneous/delete_user.html")
 
+@login_required
 def delete_user(request,username,pk):
     if request.POST:
-        user = User.objects.filter(username = username, id =pk).get()
-        user.delete()
+        obj = get_object_or_404(User, username = request.user.username, id =request.user.id)
+        print(obj.username)
+        obj.delete()
         return redirect("Login")
     else:
         return render(request, "Miscellaneous/delete_user.html")
@@ -41,9 +43,8 @@ class TranslateForm(forms.ModelForm):
         'username': forms.TextInput(attrs={"required":True}),
         "text_to_translate":forms.Textarea(attrs={
                                         "required":True,
-                                        "placeholder":"Max of 1000 characters",
-                                        })
-                }
+                                        "placeholder":"Max of 1000 characters"})
+                                        }
 
 @login_required
 def translate_form_view(request):

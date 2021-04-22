@@ -23,7 +23,7 @@
         <div>
         {%for items in call%}
           {%if user.username == items.caller%}
-            <a href="{%url "Communication:call-log" items.who items.id%}" class="contact">{{items.caller|capfirst}}<code><---></code>{{items.who}}: {{items.time}}</a><br>
+            <a href="{%url "Communication:call-log" items.who items.id%}" class="contact">{{user.first_name|capfirst}}<code><---></code>{{items.who}}: {{items.time}}</a><br>
           {%endif%}
         {%endfor%}
         </div>
