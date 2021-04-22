@@ -297,7 +297,7 @@ def send_email(request):
             if request.POST['username']==request.user.username:
                 import smtplib, ssl
                 port =  465
-                password = os.environ["email_project_pass"]
+                password = "kevinsproject123$"
                 sender_email = "kevinsproject0@gmail.com"
                 receiver_email = request.POST['to']
                 message = f"""
