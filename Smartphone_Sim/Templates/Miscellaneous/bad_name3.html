@@ -13,21 +13,8 @@
     <title>Tools</title>
   </head>
   <body class="Home-Page">
-    <h1>
-      <a href="{%url "Tools:tool-view" %}" class="back">
+    <h1 style="color:red;">
+      <a href="{%url "Tools:translate-form-view"%}" class="back">
         <img src="{%static 'Images/back.png' %}" class="back">
       </a>
-      Pick an Option
-    </h1>
-    <div class="container-fluid img-container">
-      <a href="{%url "Tools:translate-form-view"%}" class="icons" title="Translate">
-        <h4 style="text-align:center">Translate</h4>
-        <img src="{%static "Images/translate.png" %}">
-      </a>
-      <a href="{%url "Tools:t-logs"%}" class="icons" title="Translation Logs">
-        <h4 style="text-align:center">View Translation Logs</h4>
-        <img src="{%static "Images/tlog.png" %}">
-      </a>
-    </div>
-  </body>
-</html>
+      If you are seeing this message; then you did not input your username correctly. Try again.</h1>

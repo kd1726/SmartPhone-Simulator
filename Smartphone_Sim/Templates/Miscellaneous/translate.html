@@ -14,20 +14,20 @@
   </head>
   <body class="Home-Page">
     <h1>
-      <a href="{%url "Tools:tool-view" %}" class="back">
+      <a href="{%url "Tools:translate-view"%}" class="back">
         <img src="{%static 'Images/back.png' %}" class="back">
       </a>
-      Pick an Option
-    </h1>
+      Translate Text</h1>
     <div class="container-fluid img-container">
-      <a href="{%url "Tools:translate-form-view"%}" class="icons" title="Translate">
-        <h4 style="text-align:center">Translate</h4>
-        <img src="{%static "Images/translate.png" %}">
-      </a>
-      <a href="{%url "Tools:t-logs"%}" class="icons" title="Translation Logs">
-        <h4 style="text-align:center">View Translation Logs</h4>
-        <img src="{%static "Images/tlog.png" %}">
-      </a>
+      <div clas="rows">
+        <div>
+          <form method="POST" action="{%url "Tools:translating"%}">
+            {%csrf_token%}
+            {{form|crispy}}
+            <div class="d-flex justify-content-center">
+              <input type="submit" value="Send" class="btn login-button">
+            </div>
+          </form>
+      </div>
     </div>
-  </body>
-</html>
+  </div>

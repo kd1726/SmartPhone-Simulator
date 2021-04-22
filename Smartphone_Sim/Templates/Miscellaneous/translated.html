@@ -14,20 +14,21 @@
   </head>
   <body class="Home-Page">
     <h1>
-      <a href="{%url "Tools:tool-view" %}" class="back">
+      <a href="{%url "Tools:translate-form-view"%}" class="back">
         <img src="{%static 'Images/back.png' %}" class="back">
       </a>
-      Pick an Option
-    </h1>
-    <div class="container-fluid img-container">
-      <a href="{%url "Tools:translate-form-view"%}" class="icons" title="Translate">
-        <h4 style="text-align:center">Translate</h4>
-        <img src="{%static "Images/translate.png" %}">
-      </a>
-      <a href="{%url "Tools:t-logs"%}" class="icons" title="Translation Logs">
-        <h4 style="text-align:center">View Translation Logs</h4>
-        <img src="{%static "Images/tlog.png" %}">
-      </a>
+      Your Translation</h1>
+    <div class="container-fluid">
+      <div class="rows">
+        <div class="container">
+          <h2>Original Text</h2><br>
+          <p>{{result.text_to_translate}}</p>
+        </div>
+        <div class="container">
+          <h2>Translated Text</h2><br>
+          <p>{{result.translation}}</p>
+        </div>
+      </div>
     </div>
   </body>
 </html>
