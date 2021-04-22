@@ -46,6 +46,7 @@ h4.title{
 
 input[type="submit"]{
   background-image: linear-gradient(-45deg,#001340,#2c9c91,#001340);
+  font-family: 'Encode Sans Condensed', sans-serif !important;
   color:white;
   padding:10px 25px 10px 25px;
   border: thin solid #2c9c91;
@@ -53,6 +54,7 @@ input[type="submit"]{
 
 input[type="submit"]:active{
   background-image: linear-gradient(-45deg,#001340,#2c9c91,#001340);
+  font-family: 'Encode Sans Condensed', sans-serif !important;
   color:white;
   padding:10px 25px 10px 25px;
   border: thin solid #2c9c91;
@@ -60,18 +62,22 @@ input[type="submit"]:active{
 
 a:link{
   color:white;
+  font-family: 'Encode Sans Condensed', sans-serif !important;
 }
 
 a:visited{
   color:white;
   text-decoration: none !important;
+  font-family: 'Encode Sans Condensed', sans-serif !important;
 }
 h1,h2,h3,h4,h5,h6{
   color:white !important;
   text-align: center;
+  font-family: 'Encode Sans Condensed', sans-serif !important;
 }
 p{
   color:white;
+  font-family: 'Encode Sans Condensed', sans-serif !important;
 }
 #make-account-form{
   width:50%;
@@ -85,17 +91,31 @@ p{
 button.login-button{
   background-image: linear-gradient(-45deg,#001340,#2c9c91,#001340);
   color:white;
+  font-family: 'Encode Sans Condensed', sans-serif !important;
   padding:10px 25px 10px 25px;
   border: thin solid #2c9c91;
   border-radius: 10px;
 }
 
 .Home-Page{
-  background-image: linear-gradient(-45deg,#001340,#2c9c91,#001340);
+  font-family: 'Encode Sans Condensed', sans-serif !important;
+  background-image: linear-gradient(-45deg,#324266,#56afa7,#324266);
   background-size:cover;
   background-position: center,center;
   background-repeat: no-repeat;
+  animation-name: alternatin;
+  animation-duration:  5s;
+  animation-iteration-count: infinite;
 }
+/*@keyframes alternating {
+  0%{background-image: linear-gradient(-45deg,#001340,#2c9c91,#001340);}
+  17%{background-image: linear-gradient(-45deg,#192a53,#41a59c,#192a53);}
+  37%{background-image: linear-gradient(-45deg,#324266,#56afa7,#324266);}
+  51%{background-image: linear-gradient(-45deg,#4c5979,#6bb9b2,#4c5979);}
+  68%{background-image: linear-gradient(-45deg,#324266,#56afa7,#324266);}
+  85%{background-image: linear-gradient(-45deg,#192a53,#41a59c,#192a53);}
+  100%{background-image: linear-gradient(-45deg,#001340,#2c9c91,#001340);}
+}*/
 
 .img-container{
   display: flex;
@@ -107,6 +127,7 @@ button.login-button{
 a:link.icons{
   width:20%;
   text-decoration: none !important;
+  margin-top: 5%;
 }
 a:link.icons>img{
   border:thin solid transparent;
@@ -130,11 +151,13 @@ a:link.back{
 }
 a:link.contact{
   text-decoration: none !important;
+  font-family: 'Encode Sans Condensed', sans-serif !important;
   font-size: 50px;
   color:white;
 }
 a:link.contact:hover{
   text-decoration: none !important;
+  font-family: 'Encode Sans Condensed', sans-serif !important;
   font-size: 50px;
   color:turquoise;
 }
@@ -155,6 +178,7 @@ button.keypad-asterisk{
   border:thin solid blue;
   margin: 10px;
   border-radius: 50%;
+  font-family: 'Encode Sans Condensed', sans-serif !important;
   font-size: 160px;
   width:30%;
   height:auto;
@@ -223,6 +247,7 @@ table{
 }
 li{
   color:white;
+  font-family: 'Encode Sans Condensed', sans-serif !important;
 }
 #rock,#paper,#scissors{
   width:20%;
@@ -265,6 +290,7 @@ button.keypad{
 .numbers{
   background-image: linear-gradient(-45deg,midnightblue,skyblue,midnightblue);
   width:25%;
+  font-family: 'Encode Sans Condensed', sans-serif !important;
   font-size: 80px;
   border-radius: 50%;
   animation-name: guessbiggersmaller;

@@ -15,4 +15,9 @@ urlpatterns = [
     path("Translator/Logs/Log/<str:orgin_language>/<str:new_language>/<int:pk>/",views.ViewTranslationLog.as_view(),name="view-t-logs"),
     path("Translator/Logs/Log/Delete/<str:orgin_language>/<str:new_language>/<int:pk>/",views.DeleteTLog,name="delete-view-t-logs"),
     path("Translator/Logs/Log/Delete/Deleting/<str:orgin_language>/<str:new_language>/<int:pk>/",views.deletetlog,name="deleting-t-log"),
+    path("Currency-Converter/",views.cc,name="cc"),
+    path("Maps/",views.maps,name="maps"),
+    path("Weather/",views.weather,name="weather"),
+    path("Authenticator/",views.auth,name="auth"),
+    path("Picutres-Images/",views.pi,name="pi"),
 ]

@@ -61,10 +61,17 @@ def translate(request):
                 tot = request.POST['text_to_translate']
                 translator = tr(from_lang = ol, to_lang = nl)
                 translation = translator.translate(tot)
-                new_obj = Translator.objects.create(owner= request.user, username = request.user.username, orgin_language = ol,
-                                            new_language = nl, text_to_translate = tot, translation = translation)
-                id = new_obj.id
-                return redirect("Tools:translated",orgin_language=ol, new_language=nl,pk=id)
+                message = f"{ol} IS AN INVALID SOURCE LANGUAGE . EXAMPLE: LANGPAIR=EN|IT USING 2 LETTER ISO OR RFC3066 LIKE ZH-CN. ALMOST ALL LANGUAGES SUPPORTED BUT SOME MAY HAVE NO CONTENT"
+                message1 =f"{nl} IS AN INVALID SOURCE LANGUAGE . EXAMPLE: LANGPAIR=EN|IT USING 2 LETTER ISO OR RFC3066 LIKE ZH-CN. ALMOST ALL LANGUAGES SUPPORTED BUT SOME MAY HAVE NO CONTENT"
+                if message == translation:
+                    return render(request,"Miscellaneous/bad_lang.html")
+                elif message1 == translation:
+                    return render(request,"Miscellaneous/bad_lang.html")
+                else:
+                    new_obj = Translator.objects.create(owner= request.user, username = request.user.username, orgin_language = ol,
+                                                new_language = nl, text_to_translate = tot, translation = translation)
+                    id = new_obj.id
+                    return redirect("Tools:translated",orgin_language=ol, new_language=nl,pk=id)
             else:
                 return render(request,"Miscellaneous/bad_name3.html")
         else:
@@ -103,3 +110,23 @@ def deletetlog(request,orgin_language,new_language,pk):
     obj = get_object_or_404(Translator,id=pk,orgin_language=orgin_language, new_language= new_language)
     obj.delete()
     return redirect("Tools:t-logs")
+
+@login_required
+def cc(request):
+    return render(request,"Miscellaneous/cc.html")
+
+@login_required
+def maps(request):
+    return render(request,"Miscellaneous/maps.html")
+
+@login_required
+def weather(request):
+    return render(request,"Miscellaneous/weather.html")
+
+@login_required
+def auth(request):
+    return render(request,"Miscellaneous/auth.html")
+
+@login_required
+def pi(request):
+    return render(request,"Miscellaneous/images.html")
