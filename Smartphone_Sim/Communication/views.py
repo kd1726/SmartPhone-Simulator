@@ -10,6 +10,7 @@ import os
 from twilio.rest import Client
 from Smartphone_Sim.settings import TWILIO_AUTH_SID, TWILIO_AUTH_TOKEN
 from django import forms
+import twilio
 # Create your views here.
 
 @login_required
@@ -26,30 +27,35 @@ def make_a_call_view(request):
 
 @login_required
 def calling(request):
-    import twilio
     if request.POST:
         global number
         number = request.POST['number']
-        account_sid = TWILIO_AUTH_SID
-        auth_token = TWILIO_AUTH_TOKEN
-        client = Client(account_sid, auth_token)
+        try:
+            account_sid = TWILIO_AUTH_SID
+            auth_token = TWILIO_AUTH_TOKEN
+            client = Client(account_sid, auth_token)
 
-        call = client.calls.create(
-                                url='http://demo.twilio.com/docs/voice.xml',
-                                to=number,
-                                from_='+19564136773')
-        print(call.sid)
-        #numbers = Contacts.objects.all().filter(Whos_Phone=request.user.username)
-        #for i in numbers:
-        #    if i.mobile_number==number:
-        #        who = Contacts.objects.all().filter(Whos_Phone=request.user.username,mobile_number=number).contact_name
-        #        break
-        #    else:
-        #        who = number
+            call = client.calls.create(
+                                    url='http://demo.twilio.com/docs/voice.xml',
+                                    to=number,
+                                    from_='+19564136773')
+
+            print(call.sid)
+        except twilio.base.exceptions.TwilioRestException as e:
+            return render(request, "Communication/bad_number.html")
+        try:
+            numbers = Contacts.objects.all().filter(Whos_Phone=request.user.username, mobile_number = number).get()
+            print(numbers.contact_name)
+            if numbers!= None:
+                who = numbers.contact_name
+            else:
+                who = number
+        except Contacts.DoesNotExist as e:
+            who = number
         Call.objects.create(
         caller1 = request.user,
         caller = request.user.username,
-        who  = number
+        who  = who
         )
         return redirect("Communication:conversation")
     else:
@@ -205,17 +211,29 @@ def send_text(request):
         if form.is_valid():
             if request.POST['texter']==request.user.username:
                 from twilio.rest import Client
-                account_sid = TWILIO_AUTH_SID
-                auth_token = TWILIO_AUTH_TOKEN
-                client = Client(account_sid, auth_token)
-                message = client.messages.create(
-                    body = request.POST['message'],
-                    from_="+19564136773",
-                    to = request.POST['who']
-                    )
-                print(message.sid)
+                try:
+                    account_sid = TWILIO_AUTH_SID
+                    auth_token = TWILIO_AUTH_TOKEN
+                    client = Client(account_sid, auth_token)
+                    message = client.messages.create(
+                        body = request.POST['message'],
+                        from_="+19564136773",
+                        to = request.POST['who']
+                        )
+                    print(message.sid)
+                except twilio.base.exceptions.TwilioRestException as e:
+                    return render(request,"Communication/bad_number1.html")
                 form.save()
-                Text.objects.filter(texter=request.user.username,).update(texter1=request.user)
+                try:
+                    numbers = Contacts.objects.all().filter(Whos_Phone=request.user.username, mobile_number = request.POST['who']).get()
+                    print(numbers.contact_name)
+                    if numbers!= None:
+                        who = numbers.contact_name
+                    else:
+                        who = number
+                except Contacts.DoesNotExist as e:
+                    who = number
+                Text.objects.filter(texter=request.user.username,).update(texter1=request.user, who=who)
                 return redirect("Communication:text-section")
             else:
                 return render(request,"Communication/bad_name1.html",{"form":form})
