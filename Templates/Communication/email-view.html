@@ -1,0 +1,33 @@
+{%load static%}
+{%load crispy_forms_tags%}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'CSS/App.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Condensed:wght@100&display=swap" rel="stylesheet">
+    <title>Email Section</title>
+  </head>
+  <body class="Home-Page">
+    <h1>
+      <a href="{%url "Communication:communication-view" %}" class="back">
+        <img src="{%static 'Images/back.png' %}" class="back">
+      </a>
+      Pick an Option
+    </h1>
+    <div class="container-fluid img-container">
+      <a href="{%url "Communication:emails"%}" class="icons" title="Missed Calls">
+        <h4 style="text-align:center">Sent Emails</h4>
+        <img src="{%static "Images/email.png" %}">
+      </a>
+      <a href="{%url "Communication:send-email-view"%}" class="icons" title="Voice Mail">
+        <h4 style="text-align:center">Send Email</h4>
+        <img src="{%static "Images/send.png" %}">
+      </a>
+    </div>
+  </body>
+</html>
