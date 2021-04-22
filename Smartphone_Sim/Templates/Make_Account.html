@@ -16,7 +16,12 @@
     <div class="d-flex justify-content-center">
       <form method="POST" id="make-account-form">
         {%csrf_token%}
-        <h1>Create Account</h1>
+        <h1>
+          <a href="{%url "Login"%}" class="back">
+            <img src="{%static 'Images/back.png' %}" class="back">
+          </a>
+            Create Account
+          </h1>
         {{form|crispy}}
         <div class="form-group d-flex justify-content-center">
           <input type="Submit" value="Create" class="btn login-button"/>
