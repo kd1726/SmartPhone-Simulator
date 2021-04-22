@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-q8_iga)!#^(r9!q#pw!ugnuhtzsqzqi4w%fz+0d79@j2j_8l%4"
-TWILIO_AUTH_TOKEN = "0a33cd2d622bf600512087790614e361"
+TWILIO_AUTH_TOKEN = "e0501fffd7c39df186f93d2f4aea8bed"
 TWILIO_AUTH_SID = "ACc52255411661040dab50f0f944e722e5"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
