@@ -28,7 +28,7 @@ TWILIO_AUTH_SID = "ACc52255411661040dab50f0f944e722e5"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.kevinsproject.xyz','kevinsproject.xyz','23.239.15.144']
+ALLOWED_HOSTS = ['127.0.0.1','www.kevinsproject.xyz','kevinsproject.xyz','23.239.15.144']
 
 # Application definition
 
@@ -136,4 +136,9 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
 LOGOUT_REDIRECT_URL = "Login"
 LOGIN_REDIRECT_URL = 'Home'
 LOGIN_URL = 'Login'
+EMAIL_HOST = '23.239.15.144'
+EMAIL_HOST_USER = "kevinsproject0@gmail.com"
+EMAIL_HOST_PASSWORD = "kevinsproject123$"
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

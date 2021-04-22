@@ -6,6 +6,7 @@ from .models import Contacts,Call,Text,Emailing
 from django.contrib.auth.models import User
 from django.views.generic import ListView,CreateView,UpdateView,DeleteView,DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
+from django.core.mail import send_mail
 import os
 from twilio.rest import Client
 from Smartphone_sim.settings import TWILIO_AUTH_SID, TWILIO_AUTH_TOKEN
@@ -300,6 +301,13 @@ def send_email(request):
                 password = "kevinsproject123$"
                 sender_email = "kevinsproject0@gmail.com"
                 receiver_email = request.POST['to']
+                send_mail(
+                request.POST['subject'],
+                resquest.POST['message'],
+                sender_email,
+                receiver_email,
+                fail_silently = False
+                )
                 message = f"""
                 Subject: {request.POST['subject']}
 
