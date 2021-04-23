@@ -10,6 +10,7 @@ from django.core.mail import send_mail
 import os
 from twilio.rest import Client
 from Smartphone_sim.settings import TWILIO_AUTH_SID, TWILIO_AUTH_TOKEN
+from django.conf import settings
 from django import forms
 import twilio
 # Create your views here.
@@ -296,26 +297,23 @@ def send_email(request):
         form = CreateEmail(request.POST)
         if form.is_valid():
             if request.POST['username']==request.user.username:
-                import smtplib, ssl
-                port =  465
+		import smtplib
                 password = "kevinsproject123$"
                 sender_email = "kevinsproject0@gmail.com"
                 receiver_email = request.POST['to']
-                send_mail(
-                request.POST['subject'],
-                resquest.POST['message'],
-                sender_email,
-                receiver_email,
-                fail_silently = False
-                )
-                message = f"""
-                Subject: {request.POST['subject']}
-
-                {request.POST['message']}"""
-                context = ssl.create_default_context()
-                with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
-                    server.login(sender_email, password)
-                    server.sendmail(sender_email, receiver_email, message)
+		server = smtplib.SMTP('smtp.gmail.com:587')
+		server.ehlo()
+		server.starttls()
+		server.login(settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD)
+		message = "Subject: {}\n\n".format(request.POST['subject'],request.POST['message']
+		server.send(settings.EMAIL_HOST_USER,receiver_email,message)
+		server.quit()
+                #send_mail(
+                #request.POST['subject'],
+                #request.POST['message'],
+                #settings.EMAIL_HOST_USER,
+                #[receiver_email],
+                #)
                 form.save()
                 Emailing.objects.filter(username=request.user.username,).update(whos_email1=request.user)
                 return redirect("Communication:email-section")

@@ -13,7 +13,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 from django.core.management import utils
 import os
+import json
 
+with open('/etc/config.json') as config_file:
+    config = json.load(config_file)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,9 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-q8_iga)!#^(r9!q#pw!ugnuhtzsqzqi4w%fz+0d79@j2j_8l%4"
-TWILIO_AUTH_TOKEN = "e0501fffd7c39df186f93d2f4aea8bed"
-TWILIO_AUTH_SID = "ACc52255411661040dab50f0f944e722e5"
+SECRET_KEY = config['SECRET_KEY']
+TWILIO_AUTH_TOKEN =config['TWILIO_AUTH_TOKEN']
+TWILIO_AUTH_SID = config['TWILIO_AUTH_SID']
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -136,9 +140,11 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
 LOGOUT_REDIRECT_URL = "Login"
 LOGIN_REDIRECT_URL = 'Home'
 LOGIN_URL = 'Login'
-EMAIL_HOST = '23.239.15.144'
-EMAIL_HOST_USER = "kevinsproject0@gmail.com"
-EMAIL_HOST_PASSWORD = "kevinsproject123$"
-EMAIL_PORT = 465
-EMAIL_USE_SSL = True
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = config['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = config['EMAIL_HOST_PASSWORD']
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
