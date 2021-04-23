@@ -162,7 +162,7 @@ class ViewCallLog(ListView):
     template_name = "Communication/call_log.html"
     context_object_name = "call"
     ordering = ['-time']
-    
+
 @method_decorator(login_required, name="dispatch")
 class ViewCall(DetailView):
     model = Call
@@ -237,7 +237,7 @@ def send_text(request):
                         who = request.POST['who']
                 except Contacts.DoesNotExist as e:
                     who = request.POST['who']
-                Text.objects.filter(texter=request.user.username,).update(texter1=request.user, who=who)
+                Text.objects.filter(texter=request.user.username,who=request.POST['who']).update(texter1=request.user, who=who)
                 return redirect("Communication:text-section")
             else:
                 return render(request,"Communication/bad_name1.html",{"form":form})
