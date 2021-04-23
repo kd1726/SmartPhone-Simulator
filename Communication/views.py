@@ -297,17 +297,17 @@ def send_email(request):
         form = CreateEmail(request.POST)
         if form.is_valid():
             if request.POST['username']==request.user.username:
-		import smtplib
+		        import smtplib
                 password = "kevinsproject123$"
                 sender_email = "kevinsproject0@gmail.com"
                 receiver_email = request.POST['to']
-		server = smtplib.SMTP('smtp.gmail.com:587')
-		server.ehlo()
-		server.starttls()
-		server.login(settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD)
-		message = "Subject: {}\n\n".format(request.POST['subject'],request.POST['message']
-		server.send(settings.EMAIL_HOST_USER,receiver_email,message)
-		server.quit()
+        		server = smtplib.SMTP('smtp.gmail.com:587')
+        		server.ehlo()
+        		server.starttls()
+        		server.login(settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD)
+        		message = "Subject: {}\n\n".format(request.POST['subject'],request.POST['message']
+        		server.send(settings.EMAIL_HOST_USER,receiver_email,message)
+        		server.quit()
                 #send_mail(
                 #request.POST['subject'],
                 #request.POST['message'],
