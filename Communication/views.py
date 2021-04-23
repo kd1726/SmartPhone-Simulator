@@ -161,7 +161,8 @@ class ViewCallLog(ListView):
     model = Call
     template_name = "Communication/call_log.html"
     context_object_name = "call"
-
+    ordering = ['-time']
+    
 @method_decorator(login_required, name="dispatch")
 class ViewCall(DetailView):
     model = Call
@@ -252,6 +253,7 @@ class ViewMessages(ListView):
     model = Text
     template_name = "Communication/view-messages.html"
     context_object_name = "text"
+    ordering = ['-time']
 
 @method_decorator(login_required, name="dispatch")
 class ViewConversation(DetailView):
@@ -330,6 +332,7 @@ class ViewEmails(ListView):
     model = Emailing
     template_name = "Communication/view-emails.html"
     context_object_name = "email"
+    ordering = ['-time']
 
 @method_decorator(login_required, name="dispatch")
 class ViewEmailConversation(DetailView):
