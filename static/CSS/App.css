@@ -4,6 +4,7 @@
   background-size:cover;
   background-position: center,center;
   background-repeat: no-repeat;
+  overflow: scroll;
 }
 #left{
   width:33.333%;
@@ -310,4 +311,147 @@ button.keypad{
   0%{opacity: 0}
   50%{opacity: 1}
   100%{opacity: 0}
+}
+@media (max-width:500px) {
+  #left{
+    width:20%;
+    float:left;
+    height:696px;
+    /*background-image: url("/static/Images/Entry.gif");*/
+    background-size:cover;
+    background-position: center;
+  }
+  #right{
+    width:20%;
+    height:696px;
+    float:left;
+    /*background-image: url("/static/Images/Entry.gif");*/
+    background-size:cover;
+    background-position: center;
+  }
+
+  #center{
+    width:60%;
+    height:696px;
+    float:left;
+    /*background-image: linear-gradient(-45deg,#001340,#2c9c91,#001340);*/
+    background-size:cover;
+    background-position: center;
+    opacity:0.9
+  }
+  h1{
+    font-size: 16px !important;
+  }
+  h2{
+    font-size: 14px !important
+  }
+  a,h4{
+    font-size:13px !important;
+  }
+  div{
+    font-size: 12px !important
+  }
+  ul li{
+    font-size:8px !important;
+  }
+  p{
+    font-size: 10px !important;
+  }
+  h6{
+    font-size: 8px !important;
+  }
+  img.back{
+    width:20px;
+    height:auto;
+  }
+  .img-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:space-around;
+    margin-top: 5%;
+  }
+  a:link.icons{
+    width:50%;
+    text-decoration: none !important;
+    margin-top: 5%;
+  }
+  a:link.icons>img{
+    border:thin solid transparent;
+    border-radius: 100%;
+    width:80%;
+    animation-name: biggersmaller;
+    animation-iteration-count: infinite;
+    animation-duration: 5s;
+    height:auto;
+  }
+
+  a:link.icons>img:hover{
+    border:thin solid #2c9c91;
+    animation-name: none;
+    border-radius: 100%;
+    width:100%;
+    height:auto;
+  }
+  .img-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width:80%;
+    justify-content:space-around;
+    margin-top: 5%;
+  }
+  button.login-button{
+    background-image: linear-gradient(-45deg,#001340,#2c9c91,#001340);
+    color:white;
+    font-family: 'Encode Sans Condensed', sans-serif !important;
+    padding:5px 15px 5px 15px;
+    border: thin solid #2c9c91;
+    border-radius: 10px;
+  }
+
+  input[type="submit"]{
+    background-image: linear-gradient(-45deg,#001340,#2c9c91,#001340);
+    font-family: 'Encode Sans Condensed', sans-serif !important;
+    color:white;
+    padding:10px 25px 10px 25px;
+    border: thin solid #2c9c91;
+  }
+  a.link.contact{
+    text-decoration: none !important;
+    font-family: 'Encode Sans Condensed', sans-serif !important;
+    font-size: 50px !important;
+    color:white;
+  }
+  .flex-blackjack-row-1 img{
+    width:50%;
+    padding:10px;
+  }
+  #rock,#paper,#scissors{
+    width:40%;
+    border-radius: 50%;
+    animation-name: rpsbiggersmaller;
+    animation-iteration-count: infinite;
+    animation-duration: 5s;
+    height:auto;
+    margin:15px;
+  }
+  @keyframes rpsbiggersmaller {
+  0%{width:35%}
+  50%{width:45%}
+  100%{width:35%}
+  }
+  .numbers{
+    background-image: linear-gradient(-45deg,midnightblue,skyblue,midnightblue);
+    width:25%;
+    font-family: 'Encode Sans Condensed', sans-serif !important;
+    font-size: 30px;
+    border-radius: 50%;
+    animation-name: guessbiggersmaller;
+    animation-iteration-count: infinite;
+    animation-duration: 5s;
+    height:auto;
+    margin:4%;
+    visibility: hidden;
+  }
 }

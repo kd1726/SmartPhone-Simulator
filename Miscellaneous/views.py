@@ -43,7 +43,9 @@ class TranslateForm(forms.ModelForm):
         'username': forms.TextInput(attrs={"required":True}),
         "text_to_translate":forms.Textarea(attrs={
                                         "required":True,
-                                        "placeholder":"Max of 1000 characters"})
+                                        "placeholder":"Max of 1000 characters",
+                                        "rows":5,
+                                        "cols":50})
                                         }
 
 @login_required

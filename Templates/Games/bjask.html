@@ -3,6 +3,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'CSS/App.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -19,12 +20,12 @@
       </a>
       Single Player or MultiPlayer?
     </h1>
-    <div class="container-fluid img-container d-flex justify-content-center">
+    <div class="container-fluid d-flex justify-content-center">
       <a href="{%url "Games:black-jack-single"%}" class="icons" title="Call">
-        <button class="login-button px-5 mr-5">Single</button>
+        <button class="login-button px-5 mr-3">Single</button>
       </a>
       <a href="{%url "Games:black-jack-double"%}" class="icons" title="Text">
-        <button class="login-button px-5 ml-5">Multi</button>
+        <button class="login-button px-5 ml-3">Multi</button>
     </div>
   </body>
 </html>

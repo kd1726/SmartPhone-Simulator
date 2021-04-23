@@ -4,6 +4,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'CSS/App.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -13,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Condensed:wght@100&display=swap" rel="stylesheet">
     <title>Tools</title>
   </head>
-  <body class="Home-Page">
+  <body class="Home-Page" style="height:696px !important;">
     <h1>
       <a href="{%url 'Tools:tool-view' %}" class="back">
         <img src="{%static 'Images/back.png' %}" class="back">
