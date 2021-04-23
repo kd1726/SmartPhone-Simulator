@@ -13,6 +13,7 @@ from Smartphone_sim.settings import TWILIO_AUTH_SID, TWILIO_AUTH_TOKEN
 from django.conf import settings
 from django import forms
 import twilio
+import smtplib
 # Create your views here.
 
 @login_required
@@ -297,17 +298,6 @@ def send_email(request):
         form = CreateEmail(request.POST)
         if form.is_valid():
             if request.POST['username']==request.user.username:
-		        import smtplib
-                password = "kevinsproject123$"
-                sender_email = "kevinsproject0@gmail.com"
-                receiver_email = request.POST['to']
-        		server = smtplib.SMTP('smtp.gmail.com:587')
-        		server.ehlo()
-        		server.starttls()
-        		server.login(settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD)
-        		message = "Subject: {}\n\n".format(request.POST['subject'],request.POST['message']
-        		server.send(settings.EMAIL_HOST_USER,receiver_email,message)
-        		server.quit()
                 #send_mail(
                 #request.POST['subject'],
                 #request.POST['message'],
@@ -323,7 +313,7 @@ def send_email(request):
             form  = CreateEmail()
             return render(request,"Communication/send-email-view.html",{"form":form})
     else:
-        form = form = CreateText()
+        form = CreateText()
         return render(request,"Communication/send-email-view.html",{"form":form})
 
 @method_decorator(login_required, name="dispatch")
