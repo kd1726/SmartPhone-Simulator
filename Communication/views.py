@@ -13,7 +13,7 @@ from Smartphone_sim.settings import TWILIO_AUTH_SID, TWILIO_AUTH_TOKEN
 from django.conf import settings
 from django import forms
 import twilio
-import smtplib
+import smtplib, ssl
 # Create your views here.
 
 @login_required
@@ -299,8 +299,10 @@ def send_email(request):
         if form.is_valid():
             if request.POST['username']==request.user.username:
                 server = smtplib.SMTP('smtp.gmail.com:587')
+		context = ssl.create_default_context()
                 server.ehlo()
-                server.starttls()
+                server.starttls(context=context)
+		server.ehlo()
                 server.login(settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD)
                 message = "Subject: {}\n\n{}".format(request.POST['subject'],request.POST['message'])
                 server.sendmail(settings.EMAIL_HOST_USER,request.POST['to'],message)
