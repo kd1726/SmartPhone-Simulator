@@ -299,10 +299,10 @@ def send_email(request):
         if form.is_valid():
             if request.POST['username']==request.user.username:
                 server = smtplib.SMTP('smtp.gmail.com:587')
-		        context = ssl.create_default_context()
+                context = ssl.create_default_context()
                 server.ehlo()
                 server.starttls(context=context)
-		        server.ehlo()
+                server.ehlo()
                 server.login(settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD)
                 message = "Subject: {}\n\n{}".format(request.POST['subject'],request.POST['message'])
                 server.sendmail(settings.EMAIL_HOST_USER,request.POST['to'],message)
