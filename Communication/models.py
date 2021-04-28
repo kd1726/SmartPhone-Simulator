@@ -19,6 +19,11 @@ class Text(models.Model):
     def __str__(self):
         return f"{self.who} <--> {self.time}"
 
+class TextPing(Text):
+
+    def __str__(self):
+        return f"{self.texter}<-->{self.who}"
+
 class Contacts(models.Model):
     Whos_Phone = models.CharField(max_length=50,null=True, blank = True)
     Whos_Phone1 = models.ForeignKey(User,on_delete=models.CASCADE,null=True)

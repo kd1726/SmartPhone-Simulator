@@ -2,13 +2,15 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from .models import Contacts,Call,Text,Emailing
+from .models import Contacts,Call,Text,TextPing,Emailing
 from django.contrib.auth.models import User
 from django.views.generic import ListView,CreateView,UpdateView,DeleteView,DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.core.mail import send_mail
+from django.views.decorators.csrf import csrf_exempt
 import os
 from twilio.rest import Client
+from twilio.twiml.messaging_response import MessagingResponse
 from Smartphone_sim.settings import TWILIO_AUTH_SID, TWILIO_AUTH_TOKEN
 from django.conf import settings
 from django import forms
@@ -67,6 +69,10 @@ def calling(request):
 @login_required
 def convo_screen(request):
     return render(request,"Communication/convo_screen.html",)
+
+@login_required
+def texting_view(request):
+    return render(request,"Communication/msg-views.html",)
 
 @method_decorator(login_required,name="dispatch")
 class ViewContacts(ListView):
@@ -228,6 +234,19 @@ def send_text(request):
                 except twilio.base.exceptions.TwilioRestException as e:
                     return render(request,"Communication/bad_number1.html")
                 form.save()
+                numbers_from = [str(names) for names in list(Text.objects.all().values_list('who'))]
+                print(numbers_from)
+                print(TextPing.objects.filter(who=request.POST['who']).get().who)
+######################  We Were here last time #################################
+                try:
+                    if TextPing.objects.filter(who=request.POST['who']).get().who in numbers_from:
+                        pass
+                except Communication.models.TextPing.DoesNotExist as e:
+                    TextPing.objects.create(texter1=request.user,
+                                         texter=request.user.username,
+                                         who=request.POST['who'],
+                                         message = request.POST['message'])
+                    return redirect("Communication:text-section")
                 try:
                     numbers = Contacts.objects.all().filter(Whos_Phone=request.user.username, mobile_number = request.POST['who']).get()
                     print(numbers.contact_name)
@@ -247,6 +266,13 @@ def send_text(request):
     else:
         form = form = CreateText()
         return render(request,"Communication/send-text-view.html",{"form":form})
+
+@method_decorator(login_required,name="dispatch")
+class Conversations(ListView):
+    model = TextPing
+    ordering = ["-time"]
+    context_object_name = "text"
+    template_name = "Communication/view_conversations.html"
 
 @method_decorator(login_required, name="dispatch")
 class ViewMessages(ListView):
