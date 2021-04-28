@@ -30,7 +30,7 @@ TWILIO_AUTH_TOKEN =config['TWILIO_AUTH_TOKEN']
 TWILIO_AUTH_SID = config['TWILIO_AUTH_SID']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','www.kevinsproject.xyz','kevinsproject.xyz','23.239.15.144']
 
