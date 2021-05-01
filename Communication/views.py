@@ -241,25 +241,27 @@ def send_text(request):
                     # print(message.sid)
                 except twilio.base.exceptions.TwilioRestException as e:
                     return render(request,"Communication/bad_number1.html")
-                form.save()
                 numbers_from = [names for names in list(Text.objects.all().values_list('who'))]
                 potential_new_numbers = [numbers for numbers in list(TextSave.objects.filter(sender=request.user.username).all().values_list("target"))]
                 #############We were here ###################
-                for i, content in enumerate(numbers_from):
-                    if request.POST['who'] in content[0]:
+                nums = [content[0] for i, content in enumerate(numbers_from)]
+                print(nums)
+                for i in nums:
+                    if request.POST['who'] in nums:
+                        print(i)
                         print("This happened")
+                        form.save()
                         Text.objects.filter(texter=request.user.username,who=request.POST['who']).update(texter1=request.user)
                         return redirect("Communication:text-section")
-
-                print(content[0])
                 print("This also happened")
-                for i, content in enumerate(numbers_from):
-                     if request.POST['who'] not in content:
+                for i in nums:
+                     if request.POST['who'] not in nums:
                          print("This is happening")
                          TextSave.objects.create(sender1=request.user,
                                              sender=request.user.username,
                                              target=request.POST['who'],
                                              message = request.POST['message'])
+                         form.save()
                          Text.objects.filter(texter=request.user.username,who=request.POST['who']).update(texter1=request.user)
                          return redirect("Communication:text-section")
             else:
