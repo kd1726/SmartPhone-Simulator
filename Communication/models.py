@@ -19,10 +19,18 @@ class Text(models.Model):
     def __str__(self):
         return f"{self.who} <--> {self.time}"
 
-class TextPing(Text):
-
+class TextSave(models.Model):
+    sender1 = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    sender =  models.CharField(max_length=50,null=True, blank = True)
+    target = models.CharField(max_length=50,null=True)
+    message = models.TextField(max_length=1000,null=False)
+    time = models.DateTimeField(default = timezone.now)
     def __str__(self):
-        return f"{self.texter}<-->{self.who}"
+        return f"{self.sender} <--> {self.target}"
+    pass
+    # texter1 = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    # # def __str__(self):
+    # #     return f"{self.texter}<-->{self.who}"
 
 class Contacts(models.Model):
     Whos_Phone = models.CharField(max_length=50,null=True, blank = True)

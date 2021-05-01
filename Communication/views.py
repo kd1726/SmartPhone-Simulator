@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from .models import Contacts,Call,Text,TextPing,Emailing
+from .models import Contacts,Call,Text,TextSave,Emailing
 from django.contrib.auth.models import User
 from django.views.generic import ListView,CreateView,UpdateView,DeleteView,DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
@@ -16,6 +16,7 @@ from django.conf import settings
 from django import forms
 import twilio
 import smtplib, ssl
+from collections import Counter
 # Create your views here.
 
 @login_required
@@ -213,6 +214,13 @@ def send_text_view(request):
     form = CreateText()
     return render(request,"Communication/send-text-view.html",{"form":form})
 
+def counterSubset(list1, list2):
+    c1, c2 = Counter(list1), Counter(list2)
+    for k, n in c1.items():
+        if n > c2[k]:
+            return False
+    return True
+
 @login_required
 def send_text(request):
     form = CreateText()
@@ -225,39 +233,35 @@ def send_text(request):
                     account_sid = TWILIO_AUTH_SID
                     auth_token = TWILIO_AUTH_TOKEN
                     client = Client(account_sid, auth_token)
-                    message = client.messages.create(
-                        body = request.POST['message'],
-                        from_="+19564136773",
-                        to = request.POST['who']
-                        )
-                    print(message.sid)
+                    # message = client.messages.create(
+                    #     body = request.POST['message'],
+                    #     from_="+19564136773",
+                    #     to = request.POST['who']
+                    #     )
+                    # print(message.sid)
                 except twilio.base.exceptions.TwilioRestException as e:
                     return render(request,"Communication/bad_number1.html")
                 form.save()
-                numbers_from = [str(names) for names in list(Text.objects.all().values_list('who'))]
-                print(numbers_from)
-                print(TextPing.objects.filter(who=request.POST['who']).get().who)
-######################  We Were here last time #################################
-                try:
-                    if TextPing.objects.filter(who=request.POST['who']).get().who in numbers_from:
-                        pass
-                except Communication.models.TextPing.DoesNotExist as e:
-                    TextPing.objects.create(texter1=request.user,
-                                         texter=request.user.username,
-                                         who=request.POST['who'],
-                                         message = request.POST['message'])
-                    return redirect("Communication:text-section")
-                try:
-                    numbers = Contacts.objects.all().filter(Whos_Phone=request.user.username, mobile_number = request.POST['who']).get()
-                    print(numbers.contact_name)
-                    if numbers!= None:
-                        who = numbers.contact_name
-                    else:
-                        who = request.POST['who']
-                except Contacts.DoesNotExist as e:
-                    who = request.POST['who']
-                Text.objects.filter(texter=request.user.username,who=request.POST['who']).update(texter1=request.user, who=who)
-                return redirect("Communication:text-section")
+                numbers_from = [names for names in list(Text.objects.all().values_list('who'))]
+                potential_new_numbers = [numbers for numbers in list(TextSave.objects.filter(sender=request.user.username).all().values_list("target"))]
+                #############We were here ###################
+                for i, content in enumerate(numbers_from):
+                    if request.POST['who'] in content[0]:
+                        print("This happened")
+                        Text.objects.filter(texter=request.user.username,who=request.POST['who']).update(texter1=request.user)
+                        return redirect("Communication:text-section")
+
+                print(content[0])
+                print("This also happened")
+                for i, content in enumerate(numbers_from):
+                     if request.POST['who'] not in content:
+                         print("This is happening")
+                         TextSave.objects.create(sender1=request.user,
+                                             sender=request.user.username,
+                                             target=request.POST['who'],
+                                             message = request.POST['message'])
+                         Text.objects.filter(texter=request.user.username,who=request.POST['who']).update(texter1=request.user)
+                         return redirect("Communication:text-section")
             else:
                 return render(request,"Communication/bad_name1.html",{"form":form})
         else:
@@ -269,7 +273,7 @@ def send_text(request):
 
 @method_decorator(login_required,name="dispatch")
 class Conversations(ListView):
-    model = TextPing
+    model = TextSave
     ordering = ["-time"]
     context_object_name = "text"
     template_name = "Communication/view_conversations.html"
