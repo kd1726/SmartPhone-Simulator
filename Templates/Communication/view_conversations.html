@@ -24,10 +24,10 @@
       <div clas="rows">
         <div>
         {%for items in text%}
-          {%if user.username == items.texter%}
+          {%if user.username == items.sender%}
             <a href="#" class="contact m-3">
               <section class="bg-info">
-                <h4 style="float:left">{{items.who}}</h4><br>
+                <h4 style="float:left">{{items.target}}</h4><br>
                 <p>{{items.message}}</p>
                 <h6 style="float:right">{{items.time}}</h6>
               </section>
