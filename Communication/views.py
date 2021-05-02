@@ -278,7 +278,6 @@ def send_text(request):
                     return render(request,"Communication/bad_number1.html")
                 numbers_from = [names for names in list(Text.objects.all().values_list('who'))]
                 potential_new_numbers = [numbers for numbers in list(TextSave.objects.filter(sender=request.user.username).all().values_list("target"))]
-                #############We were here ###################
                 nums = [content[0] for i, content in enumerate(numbers_from)]
                 print(nums)
                 for i in nums:
