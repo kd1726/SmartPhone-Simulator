@@ -32,7 +32,7 @@ TWILIO_AUTH_SID = os.environ['TWILIO_SID']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','www.kevinsproject.xyz','kevinsproject.xyz','23.239.15.144']
+ALLOWED_HOSTS = ['127.0.0.1','6a696ad47fce.ngrok.io','www.kevinsproject.xyz','kevinsproject.xyz','23.239.15.144']
 
 # Application definition
 
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
+    'django_api_forms',
     'Home',
     'Communication',
     'Miscellaneous',

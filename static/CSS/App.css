@@ -319,6 +319,21 @@ button.keypad{
   box-shadow: 2px 2px 2px cyan;
 }
 
+section.sent-texts{
+  width:45%;
+  background-color: skyblue;
+  float:right;
+  margin: 5% 0 0 50%;
+  border-radius:15px;
+}
+
+section.received-texts{
+  width:45%;
+  background-color: green;
+  float:left;
+  margin: 35px;
+  border-radius:15px;
+}
 @keyframes guessbiggersmaller {
 }
 @keyframes vanishingtext {

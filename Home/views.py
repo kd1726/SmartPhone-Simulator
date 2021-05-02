@@ -1,9 +1,10 @@
 from django.shortcuts import render,redirect
+from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import MakeAccount
+from Communication.models import ReceivedTexts
 # Create your views here.
-
 def Login_View(request):
     return render(request,"Home.html",{})
 

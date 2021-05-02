@@ -15,8 +15,29 @@
   </head>
   <body class="Home-Page">
     <h1>
-      <a href="{%url "Communication:msg-views" %}" class="back">
+      <a href="{%url "Communication:Conversations" %}" class="back">
         <img src="{%static 'Images/back.png' %}" class="back">
       </a>
       Text Conversations
     </h1>
+    <div class="container-fluid">
+      <div class="row">
+        <section class="received-texts">
+          <h5 style="float:left;">Number</h5><br>
+          <p>Message</p>
+          <h6 style="float:right">Time</h6><br>
+        </section><br>
+        <section class="sent-texts">
+          <h5 style="float:left;">You</h5><br>
+          <p>Message</p>
+          <h6 style="float:right">Time</h6><br>
+        </section>
+        <div class="container">
+          <form method="POST" class="mt-5">
+            <div class="input-group">
+              <input type="text" class="form-control">
+              <div class="input-group-append">
+                <input class="input-group-text bg-info rounded" type="submit" value="Send">
+              </div>
+            </div>
+          </form>

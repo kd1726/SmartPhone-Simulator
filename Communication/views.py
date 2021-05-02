@@ -1,11 +1,13 @@
 from django.shortcuts import render,redirect,get_object_or_404
+from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from .models import Contacts,Call,Text,TextSave,Emailing
+from .models import Contacts,Call,Text,TextSave,Emailing,ReceivedTexts
 from django.contrib.auth.models import User
 from django.views.generic import ListView,CreateView,UpdateView,DeleteView,DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
+from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
 import os
@@ -15,10 +17,43 @@ from Smartphone_sim.settings import TWILIO_AUTH_SID, TWILIO_AUTH_TOKEN
 from django.conf import settings
 from django import forms
 import twilio
+from twilio import twiml
+from twilio.twiml.messaging_response import MessagingResponse
 import smtplib, ssl
+from django_api_forms import Form
 from collections import Counter
 # Create your views here.
+@csrf_exempt
+def sms_response(request):
+    number = request.POST['From']
+    body = request.POST['Body'].lower()
+    fake_list_of_usernames = User.objects.all().values_list('username')
+    list_of_usernames = [content[0] for i,content in enumerate(fake_list_of_usernames)]
+    who = ''
+    print(list_of_usernames)
+    for i in range(len(body)+1):
+        if who[1:] in list_of_usernames:
+            ReceivedTexts.objects.create(message = body[len(who)+1:],
+                                        sender = number[2:],
+                                        to = who[1:])
+            return HttpResponse(str(body))
+        who+=body[i]
 
+        if i==50 and who not in list_of_usernames:
+            print(who)
+            print("case 1")
+            resp = MessagingResponse()
+            resp.message("You did not input a valid username. Please Try again!")
+            return HttpResponse(str(resp))
+
+        elif "@"!=body[0]:
+            print(who)
+            print("case 2")
+            resp = MessagingResponse()
+            resp.message("You did not add an initiator. Please add '@' before sending your text!")
+            return HttpResponse(str(resp))
+        else:
+            pass
 @login_required
 def communcation_view(request):
     return render(request,"Communication/communication.html",{})
@@ -280,9 +315,10 @@ class Conversations(ListView):
     context_object_name = "text"
     template_name = "Communication/view_conversations.html"
 
-# @method_decorator(login_required name="dispatch")
-# class ConversationWith(ListView):
-#     model = Text
+@login_required
+def specific_converseration(request,who,pk):
+    sent_texts = Text.objects.filter(who=who,id=pk).all()
+    return render(request,"Communication/text_conversation.html",{"sent_texts":sent_texts})
 
 @method_decorator(login_required, name="dispatch")
 class ViewMessages(ListView):
