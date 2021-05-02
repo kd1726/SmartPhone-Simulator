@@ -268,12 +268,12 @@ def send_text(request):
                     account_sid = TWILIO_AUTH_SID
                     auth_token = TWILIO_AUTH_TOKEN
                     client = Client(account_sid, auth_token)
-                    # message = client.messages.create(
-                    #     body = request.POST['message'],
-                    #     from_="+19564136773",
-                    #     to = request.POST['who']
-                    #     )
-                    # print(message.sid)
+                    message = client.messages.create(
+                        body = request.POST['message'],
+                        from_="+19564136773",
+                        to = request.POST['who']
+                        )
+                    print(message.sid)
                 except twilio.base.exceptions.TwilioRestException as e:
                     return render(request,"Communication/bad_number1.html")
                 numbers_from = [names for names in list(Text.objects.all().values_list('who'))]
@@ -317,8 +317,32 @@ class Conversations(ListView):
 
 @login_required
 def specific_converseration(request,who,pk):
-    sent_texts = Text.objects.filter(who=who,id=pk).all()
-    return render(request,"Communication/text_conversation.html",{"sent_texts":sent_texts})
+    sent_texts = Text.objects.filter(texter=request.user.username,who=who).all().order_by("time")
+    recieved = ReceivedTexts.objects.filter(sender=who,to=request.user.username).all().order_by("time")
+    return render(request,"Communication/text_conversation.html",{"sent_texts":sent_texts,
+                                                                    "recieved_texts":recieved,
+                                                                    "the_number":who,
+                                                                    "the_id":pk})
+
+@login_required
+def sent_another_text(request,who,pk):
+    if request.POST:
+        try:
+            account_sid = TWILIO_AUTH_SID
+            auth_token = TWILIO_AUTH_TOKEN
+            client = Client(account_sid, auth_token)
+            message = client.messages.create(
+                body = request.POST['message'],
+                from_="+19564136773",
+                to = who
+                )
+            print(message.sid)
+        except twilio.base.exceptions.TwilioRestException as e:
+            return render(request,"Communication/bad_number1.html")
+        Text.objects.create(texter1=request.user,texter=request.user.username,
+                            who=who,message=request.POST['message'])
+        print("Work until here")
+        return redirect("Communication:specific-convo",who,pk)
 
 @method_decorator(login_required, name="dispatch")
 class ViewMessages(ListView):

@@ -27,6 +27,7 @@ urlpatterns=[
     path("Text-Section/Conversations-Messages/",views.texting_view,name="msg-views"),
     path("Text-Section/Conversations/",views.Conversations.as_view(),name="Conversations"),
     path("Text-Section/Conversations/<str:who>/<int:pk>/",views.specific_converseration,name="specific-convo"),
+    path("Text-Section/Conversations/<str:who>/<int:pk>/Texting/",views.sent_another_text,name="sent-another-text"),
     path("Text-Section/Messages/",views.ViewMessages.as_view(),name="messages"),
     path("Text-Section/Messages/<str:who>/<int:pk>/",views.ViewConversation.as_view(),name="msg-conversation"),
     path("Text-Section/Messages/Delete/<str:who>/<int:pk>/",views.DeleteText,name="delete-msg"),
