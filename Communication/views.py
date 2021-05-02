@@ -280,6 +280,10 @@ class Conversations(ListView):
     context_object_name = "text"
     template_name = "Communication/view_conversations.html"
 
+# @method_decorator(login_required name="dispatch")
+# class ConversationWith(ListView):
+#     model = Text
+
 @method_decorator(login_required, name="dispatch")
 class ViewMessages(ListView):
     model = Text
