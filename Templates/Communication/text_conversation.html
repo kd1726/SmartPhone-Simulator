@@ -20,34 +20,46 @@
       </a>
       Text Conversations
     </h1>
+    <div class="container d-flex justify-content-center">
+      <a href="{%url 'Communication:delete-text-convo-view' the_number user.username the_id%}" class="ml-5"><button class="login-button">Delete Conversation</button></a>
+    </div>
     <div class="container-fluid">
       <div class="row">
-        {%for items in recieved_texts%}
-          {%if user.username == items.to%}
-          <section class="received-texts">
-            <h5 style="float:left;">{{items.sender}}</h5><br>
-            <p>{{items.message}}</p>
-            <h6 style="float:right">{{items.time}}</h6><br>
-          </section><br>
+        {%for items in texts%}
+          {%if items.type == "recieved"%}
+            {%if user.username == items.to%}
+              <section class="received-texts">
+                <h5 style="float:left;">{{items.sender}}</h5><br>
+                <p>{{items.message}}</p>
+                <h6 style="float:right">{{items.time}}</h6><br>
+              </section><br>
+            {%endif%}
+          {%elif items.type == "sent"%}
+            {%if items.texter == user.username and items.who == the_number%}
+              <section class="sent-texts">
+                <h5 style="float:left;">You</h5><br>
+                <p>{{items.message}}</p>
+                <h6 style="float:right">{{items.time}}</h6><br>
+              </section>
+              {%endif%}
           {%endif%}
         {%endfor%}
-        {%for texts in sent_texts%}
-          {%if user.username == texts.texter and text.target == who%}
-          <section class="sent-texts">
-            <h5 style="float:left;">You</h5><br>
-            <p>{{texts.message}}</p>
-            <h6 style="float:right">{{texts.time}}</h6><br>
-          </section>
-          {%endif%}
-        {%endfor%}
-
         <div class="container">
           <form method="POST" class="mt-5" action="{%url "Communication:sent-another-text" the_number the_id%}">
             {%csrf_token%}
             <div class="input-group">
               <input type="text" class="form-control" name="message">
               <div class="input-group-append">
-                <input class="input-group-text bg-info rounded" type="submit" value="Send">
+                <input class="input-group-text bg-info rounded" type="submit" value="Send" id="send">
               </div>
             </div>
           </form>
+         </div>
+       </div>
+       <script>
+       var sent = new Audio("/static/General_Sound_Effects/sent.m4a")
+       document.getElementById('send').addEventListener('click',function(){sent.play()})
+       </script>
+     </div>
+   </body>
+</html>

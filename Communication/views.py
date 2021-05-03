@@ -16,6 +16,8 @@ from twilio.twiml.messaging_response import MessagingResponse
 from Smartphone_sim.settings import TWILIO_AUTH_SID, TWILIO_AUTH_TOKEN
 from django.conf import settings
 from django import forms
+from itertools import chain
+from django.db.models import CharField
 import twilio
 from twilio import twiml
 from twilio.twiml.messaging_response import MessagingResponse
@@ -29,26 +31,43 @@ def sms_response(request):
     body = request.POST['Body'].lower()
     fake_list_of_usernames = User.objects.all().values_list('username')
     list_of_usernames = [content[0] for i,content in enumerate(fake_list_of_usernames)]
+    numbers_from = [names for names in list(TextSave.objects.all().values_list('target'))]
+    numbers_from1 = [names for names in list(ReceivedTexts.objects.all().values_list('sender'))]
+    users = [users for users in list(User.objects.all())]
     who = ''
     print(list_of_usernames)
+    print(users)
     for i in range(len(body)+1):
         if who[1:] in list_of_usernames:
-            ReceivedTexts.objects.create(message = body[len(who)+1:],
+            if number[2:] not in numbers_from:
+                for i in users:
+                    if i.username==who[1:]:
+                        print(i.username)
+                        TextSave.objects.create(sender1=i,
+                                            sender=who[1:],
+                                            target=number[2:],
+                                            message = body[len(who)+1:])
+
+                        ReceivedTexts.objects.create(message = body[len(who)+1:],
+                                                sender = number[2:],
+                                                to = who[1:])
+
+                        return HttpResponse(str(body))
+            else:
+                ReceivedTexts.objects.create(message = body[len(who)+1:],
                                         sender = number[2:],
                                         to = who[1:])
-            return HttpResponse(str(body))
+
+                return HttpResponse(str(body))
+
         who+=body[i]
 
         if i==50 and who not in list_of_usernames:
-            print(who)
-            print("case 1")
             resp = MessagingResponse()
             resp.message("You did not input a valid username. Please Try again!")
             return HttpResponse(str(resp))
 
         elif "@"!=body[0]:
-            print(who)
-            print("case 2")
             resp = MessagingResponse()
             resp.message("You did not add an initiator. Please add '@' before sending your text!")
             return HttpResponse(str(resp))
@@ -316,10 +335,11 @@ class Conversations(ListView):
 
 @login_required
 def specific_converseration(request,who,pk):
-    sent_texts = Text.objects.filter(texter=request.user.username,who=who).all().order_by("time")
-    recieved = ReceivedTexts.objects.filter(sender=who,to=request.user.username).all().order_by("time")
-    return render(request,"Communication/text_conversation.html",{"sent_texts":sent_texts,
-                                                                    "recieved_texts":recieved,
+    sent_texts = Text.objects.filter(texter=request.user.username,who=who).all()
+    recieved = ReceivedTexts.objects.filter(sender=who,to=request.user.username).all()
+    my_objs = sorted(chain(sent_texts,recieved),key=lambda obj: obj.time)
+    print(my_objs)
+    return render(request,"Communication/text_conversation.html",{"texts":my_objs,
                                                                     "the_number":who,
                                                                     "the_id":pk})
 
@@ -342,6 +362,18 @@ def sent_another_text(request,who,pk):
                             who=who,message=request.POST['message'])
         print("Work until here")
         return redirect("Communication:specific-convo",who,pk)
+
+@login_required
+def delete_text_conversation_view(request,who,username,pk):
+    obj = get_object_or_404(TextSave,sender=username,target=who,id=pk)
+    print(obj)
+    return render(request,"Communication/delete-text-conversation.html",{"convo":obj})
+
+@login_required
+def delete_text_conversation(request,who,username,pk):
+    obj = get_object_or_404(TextSave,sender=username,target=who,id=pk)
+    obj.delete()
+    return redirect("Communication:Conversations")
 
 @method_decorator(login_required, name="dispatch")
 class ViewMessages(ListView):

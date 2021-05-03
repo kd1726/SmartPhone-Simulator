@@ -15,6 +15,7 @@ class Text(models.Model):
     texter = models.CharField(max_length=50,null=True, blank = True)
     who = models.CharField(max_length=50,null=True)
     message = models.TextField(max_length=1000,null=False)
+    type = models.CharField(max_length=10,default="sent")
     time = models.DateTimeField(default = timezone.now)
     def __str__(self):
         return f"{self.texter} --> {self.who}"
@@ -24,9 +25,10 @@ class ReceivedTexts(models.Model):
     time = models.DateTimeField(default = timezone.now)
     sender = models.CharField(max_length=50,null=True, blank = True)
     to = models.CharField(max_length=50,null=True, blank = True)
+    type = models.CharField(max_length=10,default="recieved")
     def __str__(self):
         return f"{self.sender}-->{self.to}"
-        
+
 class TextSave(models.Model):
     sender1 = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     sender =  models.CharField(max_length=50,null=True, blank = True)
