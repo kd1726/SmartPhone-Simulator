@@ -28,11 +28,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ['SECRET_KEY']
 TWILIO_AUTH_TOKEN =os.environ['TWILIO_KEY']
 TWILIO_AUTH_SID = os.environ['TWILIO_SID']
+TWILIO_API_SECRET_KEY = os.environ['TWILIO_API_SECRET_KEY']
+TWILIO_API_SID = os.environ["TWILIO_API_SID"]
+TWILIO_APP_SID = os.environ['TWILIO_APP_SID']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','ea1aa5c95c8d.ngrok.io','www.kevinsproject.xyz','kevinsproject.xyz','23.239.15.144']
+ALLOWED_HOSTS = ['127.0.0.1','a7184116c8f5.ngrok.io','www.kevinsproject.xyz','kevinsproject.xyz','23.239.15.144']
 
 # Application definition
 
