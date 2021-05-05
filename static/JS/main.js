@@ -1,3 +1,4 @@
+
 $(function () {
     var device;
 
@@ -26,7 +27,7 @@ $(function () {
                 enableRingingState: true,
                 debug: true,
             });
-
+            console.log(device)
             device.on("ready", function (device) {
                 log("Twilio.Device Ready!");
             });

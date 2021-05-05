@@ -28,9 +28,12 @@ from twilio import twiml
 from twilio.twiml.messaging_response import MessagingResponse
 import smtplib, ssl
 from django_api_forms import Form
+from dotenv import load_dotenv
 from collections import Counter
 import pprint as p
 # Create your views here.
+
+load_dotenv()
 @csrf_exempt
 def sms_response(request):
     number = request.POST['From']
@@ -88,12 +91,13 @@ def call_view(request):
     return render(request,"Communication/Call_View.html",{})
 
 @login_required
+@csrf_exempt
 def make_a_call_view(request):
     return render(request,"Communication/make_call.html",{})
 
 def get_token(request):
     identity = '+19564136773'
-    outgoing_app_sid = TWILIO_API_SID
+    outgoing_app_sid = TWILIO_APP_SID
     access_token = AccessToken(TWILIO_AUTH_SID,TWILIO_API_SID,TWILIO_API_SECRET_KEY,identity=identity)
     voice_grant = VoiceGrant(
         outgoing_application_sid=outgoing_app_sid,
@@ -103,11 +107,12 @@ def get_token(request):
     response = JsonResponse({'token':access_token.to_jwt().decode(),'identity': identity})
     redirect("Communication:make-call")
     return response
+
 @login_required
 def calling(request):
     if request.POST:
         global number
-        number = request.POST['number']
+        number = request.POST['phoneNumber']
         # try:
         #     account_sid = TWILIO_AUTH_SID
         #     auth_token = TWILIO_AUTH_TOKEN
@@ -132,18 +137,17 @@ def calling(request):
         #     who = number
         p.pprint(request.POST)
         response = VoiceResponse()
-        if 'To' in request.POST and request.POST['To'] != '+19564136773':
+        if 'phoneNumber' in request.POST and request.POST['phoneNumber'] != '+19564136773':
             print('outbound call')
-            dial.number(request.form['To'])
+            dial.number(request.form['phoneNumber'])
             return str(response.append(dial))
-        Call.objects.create(
-        caller1 = request.user,
-        caller = request.user.username,
-        who  = number
-        )
-        return redirect("Communication:conversation")
-    else:
-        return render(request,"Communication/make_call.html",{})
+        # Call.objects.create(
+        # caller1 = request.user,
+        # caller = request.user.username,
+        # who  = number
+        # )
+        # return redirect("Communication:conversation")
+
 
 @login_required
 def convo_screen(request):

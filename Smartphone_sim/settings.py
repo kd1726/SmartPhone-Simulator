@@ -35,7 +35,7 @@ TWILIO_APP_SID = os.environ['TWILIO_APP_SID']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','a7184116c8f5.ngrok.io','www.kevinsproject.xyz','kevinsproject.xyz','23.239.15.144']
+ALLOWED_HOSTS = ['127.0.0.1','76f6e8047b95.ngrok.io','www.kevinsproject.xyz','kevinsproject.xyz','23.239.15.144']
 
 # Application definition
 
