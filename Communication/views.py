@@ -105,42 +105,47 @@ def get_token(request):
     )
     access_token.add_grant(voice_grant)
     response = JsonResponse({'token':access_token.to_jwt().decode(),'identity': identity})
-    redirect("Communication:make-call")
+    print("Nah Bro")
+    # we were here!
     return response
 
 @login_required
+@csrf_exempt
 def calling(request):
-    if request.POST:
-        global number
-        number = request.POST['phoneNumber']
-        # try:
-        #     account_sid = TWILIO_AUTH_SID
-        #     auth_token = TWILIO_AUTH_TOKEN
-        #     client = Client(account_sid, auth_token)
-        #
-        #     call = client.calls.create(
-        #                             url='http://demo.twilio.com/docs/voice.xml',
-        #                             to=number,
-        #                             from_='+19564136773')
-        #
-        #     print(call.sid)
-        # except twilio.base.exceptions.TwilioRestException as e:
-        #     return render(request, "Communication/bad_number.html")
-        # try:
-        #     numbers = Contacts.objects.all().filter(Whos_Phone=request.user.username, mobile_number = number).get()
-        #     print(numbers.contact_name)
-        #     if numbers!= None:
-        #         who = numbers.contact_name
-        #     else:
-        #         who = number
-        # except Contacts.DoesNotExist as e:
-        #     who = number
-        p.pprint(request.POST)
-        response = VoiceResponse()
-        if 'phoneNumber' in request.POST and request.POST['phoneNumber'] != '+19564136773':
-            print('outbound call')
-            dial.number(request.form['phoneNumber'])
-            return str(response.append(dial))
+    global number
+    number = request.POST['phoneNumber']
+    # try:
+    #     account_sid = TWILIO_AUTH_SID
+    #     auth_token = TWILIO_AUTH_TOKEN
+    #     client = Client(account_sid, auth_token)
+    #
+    #     call = client.calls.create(
+    #                             url='http://demo.twilio.com/docs/voice.xml',
+    #                             to=number,
+    #                             from_='+19564136773')
+    #
+    #     print(call.sid)
+    # except twilio.base.exceptions.TwilioRestException as e:
+    #     return render(request, "Communication/bad_number.html")
+    # try:
+    #     numbers = Contacts.objects.all().filter(Whos_Phone=request.user.username, mobile_number = number).get()
+    #     print(numbers.contact_name)
+    #     if numbers!= None:
+    #         who = numbers.contact_name
+    #     else:
+    #         who = number
+    # except Contacts.DoesNotExist as e:
+    #     who = number
+    p.pprint(request.POST)
+    response = VoiceResponse()
+    if 'To' in request.POST and request.POST['To'] != '+19564136773':
+        print('outbound call')
+        dial.number(request.POST['To'])
+        return str(response.append(dial))
+    print("Nah Bro")
+        #return redirect("Communication:make-call")
+    return ""
+        #return redirect("Communication:make-call")
         # Call.objects.create(
         # caller1 = request.user,
         # caller = request.user.username,
