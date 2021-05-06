@@ -28,12 +28,9 @@ from twilio import twiml
 from twilio.twiml.messaging_response import MessagingResponse
 import smtplib, ssl
 from django_api_forms import Form
-from dotenv import load_dotenv
 from collections import Counter
 import pprint as p
 # Create your views here.
-
-load_dotenv()
 @csrf_exempt
 def sms_response(request):
     number = request.POST['From']
@@ -98,53 +95,59 @@ def make_a_call_view(request):
 def get_token(request):
     identity = '+19564136773'
     outgoing_app_sid = TWILIO_APP_SID
-    access_token = AccessToken(TWILIO_AUTH_SID,TWILIO_API_SID,TWILIO_API_SECRET_KEY,identity=identity)
+
+    access_token = AccessToken(TWILIO_AUTH_SID,TWILIO_API_SID,
+                                TWILIO_API_SECRET_KEY,identity=identity)
     voice_grant = VoiceGrant(
         outgoing_application_sid=outgoing_app_sid,
-        incoming_allow=True,
+        incoming_allow=False,
     )
     access_token.add_grant(voice_grant)
-    response = JsonResponse({'token':access_token.to_jwt().decode(),'identity': identity})
-    print("Nah Bro")
-    # we were here!
+
+    response = JsonResponse(
+        {'token':access_token.to_jwt().decode(),'identity': identity})
+
     return response
 
 @login_required
 @csrf_exempt
 def calling(request):
-    global number
-    number = request.POST['phoneNumber']
-    # try:
-    #     account_sid = TWILIO_AUTH_SID
-    #     auth_token = TWILIO_AUTH_TOKEN
-    #     client = Client(account_sid, auth_token)
-    #
-    #     call = client.calls.create(
-    #                             url='http://demo.twilio.com/docs/voice.xml',
-    #                             to=number,
-    #                             from_='+19564136773')
-    #
-    #     print(call.sid)
-    # except twilio.base.exceptions.TwilioRestException as e:
-    #     return render(request, "Communication/bad_number.html")
-    # try:
-    #     numbers = Contacts.objects.all().filter(Whos_Phone=request.user.username, mobile_number = number).get()
-    #     print(numbers.contact_name)
-    #     if numbers!= None:
-    #         who = numbers.contact_name
-    #     else:
-    #         who = number
-    # except Contacts.DoesNotExist as e:
-    #     who = number
-    p.pprint(request.POST)
-    response = VoiceResponse()
-    if 'To' in request.POST and request.POST['To'] != '+19564136773':
-        print('outbound call')
-        dial.number(request.POST['To'])
-        return str(response.append(dial))
-    print("Nah Bro")
-        #return redirect("Communication:make-call")
-    return ""
+    request.method == "POST"
+    if request.POST:
+        print("Hello is this being invoked?")
+        # try:
+        #     account_sid = TWILIO_AUTH_SID
+        #     auth_token = TWILIO_AUTH_TOKEN
+        #     client = Client(account_sid, auth_token)
+        #
+        #     call = client.calls.create(
+        #                             url='http://demo.twilio.com/docs/voice.xml',
+        #                             to=number,
+        #                             from_='+19564136773')
+        #
+        #     print(call.sid)
+        # except twilio.base.exceptions.TwilioRestException as e:
+        #     return render(request, "Communication/bad_number.html")
+        # try:
+        #     numbers = Contacts.objects.all().filter(Whos_Phone=request.user.username, mobile_number = number).get()
+        #     print(numbers.contact_name)
+        #     if numbers!= None:
+        #         who = numbers.contact_name
+        #     else:
+        #         who = number
+        # except Contacts.DoesNotExist as e:
+        #     who = number
+        p.pprint(request.POST)
+        response = VoiceResponse()
+        dial = Dial(callerId='+19564136773')
+#####################Was here last time############################
+        if 'To' in request.POST and request.POST['To'] != '+19564136773':
+            print('outbound call')
+            dial.number(request.POST['To'])
+            str(response.append(dial))
+            return redirect("Communication:make-call")
+    return ''
+    #return None
         #return redirect("Communication:make-call")
         # Call.objects.create(
         # caller1 = request.user,
